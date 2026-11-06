@@ -1,0 +1,1 @@
+var e=`mnd-motion`;function t(){return matchMedia(`(prefers-reduced-motion: reduce)`).matches||document.documentElement.dataset.motion===`reduce`}function n(t){let n=document.documentElement;t?n.dataset.motion=`reduce`:delete n.dataset.motion;try{t?localStorage.setItem(e,`reduce`):localStorage.removeItem(e)}catch{}}export{n,t};

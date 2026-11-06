@@ -1,0 +1,1 @@
+import{n as e}from"./motion.QOjMBs_4.js";for(let t of document.querySelectorAll(`[data-motion-toggle]`)){let n=()=>t.setAttribute(`aria-pressed`,String(document.documentElement.dataset.motion===`reduce`));n(),t.addEventListener(`click`,()=>{e(t.getAttribute(`aria-pressed`)!==`true`),n()})}

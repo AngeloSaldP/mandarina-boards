@@ -1,0 +1,1 @@
+function e({stiffness:e,damping:t,mass:n=1,value:r=0}){let i={value:r,velocity:0,target:r,setTarget(e,t){i.target=e,t!==void 0&&(i.velocity=t)},step(r){return i.velocity+=(e*(i.target-i.value)-t*i.velocity)/n*r,i.value+=i.velocity*r,Math.abs(i.target-i.value)<.001&&Math.abs(i.velocity)<.01?(i.value=i.target,i.velocity=0,!1):!0}};return i}export{e as t};
