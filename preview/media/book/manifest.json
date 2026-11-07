@@ -1,55 +1,48 @@
 {
-  "encoder": "sharp avif quality 50 effort 4",
-  "totalBytes": 105840,
+  "encoder": "sharp avif quality 50 (normal map 60) effort 4",
+  "totalBytes": 71588,
   "files": {
-    "cover_front.avif": {
+    "backdrop.avif": {
+      "width": 3104,
+      "height": 1940,
+      "bytes": 30058,
+      "quality": 50,
+      "source": "art/renders/lookdev-08/backdrop.png"
+    },
+    "backdrop-first-paint.avif": {
+      "width": 1368,
+      "height": 855,
+      "bytes": 7384,
+      "quality": 50,
+      "source": "art/renders/lookdev-08/backdrop.png"
+    },
+    "cover-color.avif": {
       "width": 1024,
-      "height": 1365,
-      "bytes": 45012,
-      "alpha": false,
-      "source": "art/renders/bakes-01/cover_front.png"
+      "height": 650,
+      "bytes": 2736,
+      "quality": 50,
+      "source": "scripts/bake-cover.mjs"
     },
-    "cover_front_waxbase.avif": {
+    "cover-normal.avif": {
       "width": 1024,
-      "height": 1365,
-      "bytes": 43554,
-      "alpha": false,
-      "source": "art/renders/bakes-01/cover_front_waxbase.png"
+      "height": 650,
+      "bytes": 10495,
+      "quality": 60,
+      "source": "scripts/bake-cover.mjs"
     },
-    "cover_inside.avif": {
-      "width": 1024,
-      "height": 1365,
-      "bytes": 2087,
-      "alpha": false,
-      "source": "art/renders/bakes-01/cover_inside.png"
+    "seal.avif": {
+      "width": 512,
+      "height": 512,
+      "bytes": 7591,
+      "quality": 50,
+      "source": "scripts/bake-cover.mjs"
     },
-    "page_paper.avif": {
-      "width": 1024,
-      "height": 1365,
-      "bytes": 2905,
-      "alpha": false,
-      "source": "art/renders/bakes-01/page_paper.png"
-    },
-    "gilt_edge.avif": {
-      "width": 1024,
-      "height": 80,
-      "bytes": 1313,
-      "alpha": false,
-      "source": "art/renders/bakes-01/gilt_edge.png"
-    },
-    "desk_plate.avif": {
-      "width": 1600,
-      "height": 1000,
-      "bytes": 9916,
-      "alpha": false,
-      "source": "art/renders/bakes-01/desk_plate_desktop.png"
-    },
-    "book_shadow.avif": {
-      "width": 800,
-      "height": 500,
-      "bytes": 1053,
-      "alpha": true,
-      "source": "art/renders/bakes-01/book_shadow_desktop.png"
+    "parchment.avif": {
+      "width": 1280,
+      "height": 800,
+      "bytes": 13324,
+      "quality": 50,
+      "source": "scripts/bake-cover.mjs"
     }
   }
 }
