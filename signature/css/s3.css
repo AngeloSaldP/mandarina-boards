@@ -1,0 +1,290 @@
+/* S3: the glyph decode. A sealed card drawn as a build-time glyph grid; unsealing reads it outward from the seal
+   and breaks it along the seal's ten segment lines into the poster. The heading resolves from an aria-hidden
+   glyph overlay once. */
+
+.chapter--s3 .s3-title {
+  position: relative;
+  max-width: 16ch;
+  margin-bottom: 1.75rem;
+  font-size: clamp(2.5rem, 6.2vw, 5.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+.s3-title__line {
+  display: block;
+  text-wrap: balance;
+}
+
+.s3-title__line--b {
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* JS hides the heading for the few frames before fonts load and the overlay is measured (never without JS). */
+.chapter--s3[data-s3-head='pending'] .s3-title {
+  opacity: 0;
+}
+
+/* The heading's glyph overlay: one box per character, the background colour over the real letter, a mono glyph on
+   top. Boxes fade out one by one and uncover the real text, which never leaves the DOM. */
+.s3-glyphline {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.s3-g {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-stretch: 87%;
+  font-weight: 400;
+  letter-spacing: 0;
+  transition: opacity 140ms var(--ease-out);
+}
+
+.s3-g.is-dim {
+  color: var(--control);
+}
+
+.s3-g.is-done {
+  opacity: 0;
+}
+
+/* ---------- The stage ---------- */
+.s3-stage {
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .s3-stage {
+    grid-template-columns: minmax(0, 1fr) 17rem;
+    gap: 3rem;
+  }
+}
+
+.s3-card {
+  margin: 0;
+}
+
+.s3-card__frame {
+  position: relative;
+  container-type: inline-size;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #0e0d10;
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  isolation: isolate;
+}
+
+.s3-card__frame::after {
+  /* The 1 px inner line sits above every layer (spec section 3.5). */
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  pointer-events: none;
+}
+
+.s3-card__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.s3-card[data-phase='open'] .s3-card__poster {
+  opacity: 1;
+}
+
+.s3-card__glyphs,
+.s3-card__wedges {
+  position: absolute;
+  inset: 0;
+}
+
+.s3-card__glyphs {
+  mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 55%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+/* 96 x 32 cells: 0.648em is Martian Mono's advance, so 96 columns span the frame; 1.215em rows make each cell
+   the poster's 16:10 share. */
+.s3-ascii {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-stretch: 87%;
+  font-size: calc(100cqi / 62.208);
+  line-height: 1.215;
+  letter-spacing: 0;
+  white-space: pre;
+  user-select: none;
+}
+
+.s3-ascii--base {
+  color: var(--accent);
+  opacity: 0.58;
+}
+
+.s3-ascii--lit {
+  color: var(--accent);
+  text-shadow: 0 0 0.6em rgba(238, 138, 60, 0.45);
+}
+
+.s3-ascii--front {
+  color: var(--ink);
+}
+
+.s3-card[data-phase='open'] .s3-card__glyphs,
+.s3-card[data-phase='dissolving'] .s3-card__glyphs {
+  opacity: 0;
+}
+
+.s3-wedge {
+  position: absolute;
+  inset: 0;
+  will-change: transform, opacity;
+}
+
+.s3-card__flash {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: radial-gradient(circle at 50% 50%, rgba(246, 183, 126, 0.55), rgba(238, 138, 60, 0.18) 22%, transparent 48%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- The seal ---------- */
+.s3-seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 4;
+  width: 22%;
+  height: auto;
+  overflow: visible;
+  translate: -50% -50%;
+}
+
+.s3-seal__shadow {
+  fill: rgba(0, 0, 0, 0.55);
+  filter: blur(3px);
+}
+
+.s3-seal__seg {
+  fill: var(--wax);
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+}
+
+.s3-seal__rim {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.s3-seal__letter {
+  fill: var(--wax-ink);
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 600;
+  font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 0;
+}
+
+.s3-card[data-phase='open'] .s3-seal,
+.s3-card[data-phase='dissolving'] .s3-seal__shadow {
+  opacity: 0;
+}
+
+.s3-card__caption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.s3-card__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 560;
+  font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 0;
+}
+
+/* ---------- Side: readout and controls ---------- */
+.s3-side {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.s3-readout {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.s3-readout > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.s3-readout dt {
+  color: var(--muted);
+}
+
+.s3-readout dd {
+  margin: 0;
+  text-align: right;
+}
+
+.chapter--s3[data-state='unsealed'] [data-s3-status] {
+  color: var(--accent);
+}
+
+.s3-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.s3-side__note {
+  font-size: 0.875rem;
+}
+
+/* ---------- Reduced motion: no scramble; the heading overlay never exists; fades only ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .s3-glyphline {
+    display: none;
+  }
+
+  .chapter--s3[data-s3-head='pending'] .s3-title {
+    opacity: 1;
+  }
+}
+
+html[data-motion='reduce'] .s3-glyphline {
+  display: none;
+}
+
+html[data-motion='reduce'] .chapter--s3[data-s3-head='pending'] .s3-title {
+  opacity: 1;
+}

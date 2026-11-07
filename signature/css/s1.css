@@ -1,0 +1,520 @@
+/* S1, the sealed book: a viewport-scale headline split around the book, in depth, with a mono HUD and the lamp. */
+
+.chapter--s1 {
+  padding-top: 4.5rem;
+  border-top: 0;
+  overflow: clip;
+}
+
+/* ---------- Light: concept C (glow and grain are generated once by js/chapters/s1.js) ---------- */
+.s1-light {
+  position: absolute;
+  inset: 0 0 auto;
+  height: min(100svh, 1100px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.s1-light__glow,
+.s1-light__warm,
+.s1-light__grain {
+  position: absolute;
+  inset: 0;
+}
+
+/* Fallback before the texture exists: a plain radial glow. */
+.s1-light__glow {
+  background: radial-gradient(ellipse 52% 58% at 50% 40%, rgba(74, 11, 24, 0.55), rgba(46, 31, 58, 0.18) 55%, transparent 80%);
+}
+
+.chapter--s1[data-light-ready] .s1-light__glow {
+  background: var(--s1-glow) center 40% / cover no-repeat;
+}
+
+.s1-light__warm {
+  background: radial-gradient(ellipse 38% 46% at 50% 40%, rgba(238, 138, 60, 0.3), rgba(142, 34, 54, 0.28) 45%, rgba(74, 11, 24, 0.18) 65%, transparent 82%);
+  opacity: 0;
+  transition: opacity var(--d-ambient) var(--ease-out);
+}
+
+.chapter--s1[data-state='unsealed'] .s1-light__warm {
+  opacity: 1;
+}
+
+.s1-light__grain {
+  opacity: 0.55;
+  background-image: var(--s1-grain, none);
+  background-size: 128px 128px;
+}
+
+/* ---------- The stage ---------- */
+.s1-stage {
+  --s1-h: clamp(480px, calc(100svh - 12.5rem), 860px);
+  position: relative;
+  isolation: isolate;
+  height: var(--s1-h);
+  container-type: size;
+}
+
+.s1-eyebrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 4;
+  color: var(--muted);
+}
+
+.s1-title {
+  display: block;
+  height: 100%;
+  margin: 0;
+  font-size: min(13.4cqw, 21cqh);
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+}
+
+.s1-title__line {
+  position: absolute;
+  display: block;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.s1-title__line--1 {
+  top: 2.6cqh;
+  left: -0.04em;
+  z-index: 1;
+}
+
+.s1-title__line--2 {
+  right: 0;
+  bottom: 9cqh;
+  z-index: 3;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--ink);
+  text-shadow: 0 0.02em 0.12em rgba(11, 11, 13, 0.55);
+}
+
+/* ---------- The object ---------- */
+.s1-object {
+  --bh: min(70cqh, 58cqw);
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  z-index: 2;
+  width: calc(var(--bh) * 0.75);
+  height: var(--bh);
+  margin: calc(var(--bh) / -2) 0 0 calc(var(--bh) * -0.375);
+  will-change: transform;
+}
+
+.s1-book {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* The page block, its gilt edges just visible at the fore-edge and the foot. */
+.s1-book__pages {
+  position: absolute;
+  inset: 1.2% -1.6% -1.4% 2%;
+  border-radius: 2px 5px 5px 2px;
+  background: var(--gilt);
+  background-size: 400% 100%;
+  background-position: 70% 0;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.6),
+    0 calc(var(--bh) * 0.05) calc(var(--bh) * 0.09) rgba(0, 0, 0, 0.55),
+    0 calc(var(--bh) * 0.14) calc(var(--bh) * 0.26) rgba(0, 0, 0, 0.6);
+}
+
+.s1-book__pages::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: repeating-linear-gradient(90deg, rgba(26, 18, 6, 0.32) 0 1px, transparent 1px 3px);
+  opacity: 0.5;
+}
+
+.s1-book__cover {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 3px 7px 7px 3px;
+  background:
+    radial-gradient(ellipse 90% 55% at 52% 18%, rgba(246, 183, 126, 0.075), transparent 70%),
+    linear-gradient(172deg, #1E1A20 0%, #17141A 46%, #110F13 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(237, 230, 221, 0.07),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    inset -1px 0 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Cloth: the same static grain, a touch stronger on the cover. */
+.s1-book__cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--s1-grain, none);
+  background-size: 128px 128px;
+  opacity: 0.7;
+}
+
+/* The highlight rolling off the top edge of the cover under the lamp. */
+.s1-book__cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(237, 230, 221, 0.05), transparent 22%, transparent 70%, rgba(0, 0, 0, 0.28));
+}
+
+.s1-book__spine {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 7%;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.1) 70%, rgba(237, 230, 221, 0.05) 86%, rgba(0, 0, 0, 0.5) 92%, transparent);
+}
+
+.s1-book__deboss {
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  width: 82%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  overflow: visible;
+  fill: none;
+  stroke-width: 0.7;
+  stroke-linecap: round;
+}
+
+.s1-book__deboss-hi {
+  stroke: rgba(237, 230, 221, 0.06);
+}
+
+.s1-book__deboss-lo {
+  stroke: rgba(0, 0, 0, 0.7);
+}
+
+/* ---------- The seal ---------- */
+.s1-seal {
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  width: 34%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+}
+
+.s1-seal__art {
+  position: absolute;
+  inset: -20%;
+  width: 140%;
+  height: 140%;
+  max-width: none;
+  overflow: visible;
+  filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.55)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.45));
+}
+
+.s1-seal__puddle,
+.s1-seal__rim,
+.s1-seal__m {
+  transition: opacity var(--d-small) var(--ease-out);
+}
+
+.s1-seal__rim {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-opacity: 0.85;
+}
+
+.s1-seal__seg {
+  stroke: rgba(242, 178, 122, 0.12);
+  stroke-width: 0.4;
+  transform-box: view-box;
+  transform-origin: 50px 50px;
+  transition:
+    translate 720ms var(--ease-out),
+    rotate 720ms var(--ease-out),
+    opacity 340ms var(--ease-out) 380ms;
+}
+
+.s1-seal__m {
+  fill: var(--wax-ink);
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 600;
+  font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 0;
+}
+
+.s1-seal__m--lo {
+  fill: #2A0610;
+  opacity: 0.7;
+}
+
+.s1-seal__flash {
+  position: absolute;
+  inset: -60%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 217, 160, 0.55), rgba(238, 138, 60, 0.22) 35%, transparent 65%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.s1-seal__embers {
+  position: absolute;
+  inset: 50% auto auto 50%;
+}
+
+.s1-ember {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  margin: -2px;
+  border-radius: 50%;
+  background: #FFD9A0;
+  box-shadow: 0 0 6px rgba(238, 138, 60, 0.8);
+  pointer-events: none;
+}
+
+.chapter--s1[data-state='unsealed'] .s1-seal__rim,
+.chapter--s1[data-state='unsealed'] .s1-seal__m,
+.chapter--s1[data-state='unsealed'] .s1-seal__puddle {
+  opacity: 0;
+}
+
+.chapter--s1[data-state='unsealed'] .s1-seal__seg {
+  translate: calc(var(--dx) * 16px) calc(var(--dy) * 16px);
+  rotate: calc((var(--i) - 4.5) * 2deg);
+  opacity: 0;
+}
+
+/* ---------- Placeholder note ---------- */
+.s1-note {
+  position: absolute;
+  top: calc(47% - min(70cqh, 58cqw) / 2);
+  left: calc(50% + min(70cqh, 58cqw) * 0.375 + 1.25rem);
+  z-index: 4;
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--control);
+  max-width: 19ch;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ---------- HUD ---------- */
+.s1-hud {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.s1-hud__item {
+  position: absolute;
+  display: flex;
+  gap: 0.6em;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.s1-hud__k {
+  color: var(--muted);
+}
+
+.s1-hud__v {
+  color: var(--ink);
+}
+
+.s1-hud__note {
+  color: var(--muted);
+  border-bottom: 1px dashed var(--control);
+}
+
+.s1-hud__count {
+  display: inline-block;
+  min-width: 2ch;
+  text-align: right;
+}
+
+.s1-hud__roll {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.s1-hud__roll > span {
+  display: inline-block;
+}
+
+.s1-hud__item--time {
+  top: 1.75rem;
+  right: 0;
+}
+
+.s1-hud__item--seal {
+  bottom: 0;
+  left: 0;
+}
+
+.s1-hud__item--edition {
+  bottom: 0;
+  left: 15rem;
+}
+
+.s1-hud__item--section {
+  right: 0;
+  bottom: 0;
+}
+
+/* Status dot: the live value. */
+.s1-hud__item--time::before {
+  content: '';
+  align-self: center;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: s1-pulse 2.4s var(--ease-in-out) infinite;
+}
+
+@keyframes s1-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.chapter--s1[data-paused] .s1-hud__item--time::before {
+  animation-play-state: paused;
+}
+
+/* ---------- Controls ---------- */
+.s1-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 1.75rem 0 2.5rem;
+}
+
+/* ---------- Light layer only ---------- */
+.s1-title,
+.s1-object,
+.s1-note,
+.s1-hud,
+.s1-eyebrow {
+  transition: opacity var(--d-medium) var(--ease-out);
+}
+
+.chapter--s1[data-light='only'] :is(.s1-title, .s1-object, .s1-note, .s1-hud, .s1-eyebrow) {
+  opacity: 0.06;
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 699px) {
+  .s1-stage {
+    --s1-h: clamp(460px, calc(100svh - 15rem), 640px);
+  }
+
+  .s1-title {
+    font-size: min(14.6cqw, 14cqh);
+  }
+
+  .s1-title__line--1 {
+    top: 3.5rem;
+  }
+
+  .s1-title__line--2 {
+    bottom: 7.6rem;
+  }
+
+  .s1-object {
+    --bh: min(57cqh, 90cqw);
+    top: 47%;
+  }
+
+  .s1-eyebrow {
+    left: 0;
+    right: auto;
+  }
+
+  .s1-note {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    max-width: none;
+  }
+
+  .s1-hud__item--time {
+    top: 1.6rem;
+    left: 0;
+    right: auto;
+  }
+
+  .s1-hud__item--seal,
+  .s1-hud__item--section {
+    bottom: 3.6rem;
+  }
+
+  .s1-hud__item--edition {
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: auto;
+  }
+
+  .s1-hud__item--seal {
+    left: 0;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .s1-light__warm {
+    transition-duration: 400ms;
+  }
+
+  .s1-seal__seg {
+    transition: opacity 240ms var(--ease-out);
+  }
+
+  .chapter--s1[data-state='unsealed'] .s1-seal__seg {
+    translate: none;
+    rotate: none;
+  }
+
+  .s1-title__line,
+  .s1-object {
+    will-change: auto;
+  }
+
+  .s1-hud__item--time::before {
+    animation: none;
+  }
+}
+
+html[data-motion='reduce'] .s1-light__warm {
+  transition-duration: 400ms;
+}
+
+html[data-motion='reduce'] .s1-seal__seg {
+  transition: opacity 240ms var(--ease-out);
+}
+
+html[data-motion='reduce'] .chapter--s1[data-state='unsealed'] .s1-seal__seg {
+  translate: none;
+  rotate: none;
+}
+
+html[data-motion='reduce'] .s1-hud__item--time::before {
+  animation: none;
+}

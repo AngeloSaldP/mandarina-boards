@@ -1,0 +1,248 @@
+/* S2, the seal close up: a relief wax seal, a loupe that magnifies a sharper copy, and a turning ring of text. */
+
+.s2-title em {
+  font-weight: 500;
+}
+
+.s2-stage {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 700px) 1fr;
+  gap: 2rem;
+  align-items: end;
+  margin-top: 1rem;
+}
+
+.s2-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  isolation: isolate;
+}
+
+/* Warm light pooled under the wax. */
+.s2-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 4%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 46% 42%, rgba(74, 11, 24, 0.55), rgba(46, 31, 58, 0.2) 48%, transparent 70%);
+}
+
+/* ---------- The ring of text ---------- */
+.s2-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.s2-ring {
+  animation: s2-turn 120s linear infinite;
+  will-change: transform;
+}
+
+.chapter--s2[data-paused] .s2-ring {
+  animation-play-state: paused;
+}
+
+@keyframes s2-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.s2-ring__text {
+  fill: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-stretch: 87%;
+  letter-spacing: 0.14em;
+}
+
+.s2-ring__glyph {
+  fill: var(--accent);
+}
+
+/* ---------- The seal ---------- */
+.s2-seal {
+  position: absolute;
+  inset: 6%;
+  touch-action: pan-y;
+  cursor: crosshair;
+}
+
+.s2-seal__art {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.s2-seal__m {
+  fill: var(--wax-ink);
+  font-family: var(--font-display);
+  font-size: 236px;
+  font-weight: 600;
+  font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 0;
+}
+
+
+/* ---------- The loupe ---------- */
+.s2-lens {
+  --d: 36%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--d);
+  aspect-ratio: 1;
+  will-change: transform;
+}
+
+.s2-lens::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.5),
+    0 18px 40px rgba(0, 0, 0, 0.6);
+}
+
+.s2-lens__view {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--bg);
+}
+
+.s2-lens__art {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  overflow: visible;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.s2-micro {
+  fill: var(--wax-ink);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-stretch: 87%;
+  opacity: 0.85;
+}
+
+/* Glass: an inner vignette, a soft crescent of lamp light and a thin metal rim. */
+.s2-lens__glass {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 26%, rgba(246, 183, 126, 0.16), rgba(246, 183, 126, 0) 32%);
+  box-shadow:
+    inset 0 0 0 1px rgba(237, 230, 221, 0.38),
+    inset 0 0 0 3px rgba(11, 11, 13, 0.55),
+    inset 0 0 26px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(11, 11, 13, 0.7);
+  pointer-events: none;
+}
+
+.s2-lens__tag {
+  position: absolute;
+  right: 4%;
+  bottom: 4%;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--control);
+  border-radius: 999px;
+  background: rgba(11, 11, 13, 0.82);
+  color: var(--ink);
+  pointer-events: none;
+}
+
+.s2-lens__handle {
+  position: absolute;
+  inset: 0;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+}
+
+.s2-lens__handle:active {
+  cursor: grabbing;
+}
+
+.chapter--s2[data-state='hold'] .s2-lens__tag {
+  border-color: var(--accent);
+}
+
+/* ---------- HUD ---------- */
+.s2-hud {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.s2-hud__k {
+  color: var(--muted);
+}
+
+.s2-hud__v {
+  color: var(--ink);
+}
+
+.s2-hud--b {
+  justify-items: end;
+}
+
+.s2-hint {
+  max-width: 40rem;
+  margin: 1.5rem auto 0;
+  text-align: center;
+}
+
+@media (max-width: 899px) {
+  .s2-stage {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 1rem;
+  }
+
+  .s2-wrap {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .s2-hud--a {
+    grid-row: 2;
+  }
+
+  .s2-hint {
+    text-align: left;
+  }
+}
+
+/* The ring text keeps 12 px or more on small screens. */
+@media (max-width: 599px) {
+  .s2-ring__text {
+    font-size: 28px;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .s2-ring {
+    animation: none;
+  }
+}
+
+html[data-motion='reduce'] .s2-ring {
+  animation: none;
+}

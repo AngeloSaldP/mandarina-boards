@@ -1,0 +1,394 @@
+/* S6: a showcase spread with a live mock tool. Numbers tick in JS (Intl, tabular figures); the chart line
+   draws with stroke-dashoffset; notifications stack with transforms only. */
+.chapter--s6 {
+  --s6-panel: color-mix(in oklab, var(--surface) 94%, var(--ink));
+}
+
+.s6__spread {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 9fr);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  background:
+    linear-gradient(90deg, transparent calc(30.77% - 18px), rgba(0, 0, 0, 0.35) 30.77%, transparent calc(30.77% + 18px)),
+    var(--surface);
+  overflow: hidden;
+}
+
+/* ---------- Left page ---------- */
+.s6__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: clamp(1.5rem, 3vw, 2.75rem);
+}
+
+.s6__folio {
+  display: flex;
+  gap: 0.75rem;
+  color: var(--muted);
+}
+
+.s6__name {
+  font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+  line-height: 1.08;
+}
+
+.s6__outcome {
+  color: var(--muted);
+}
+
+.s6__facts {
+  display: grid;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0.5rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.s6__facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.s6__facts dt {
+  color: var(--muted);
+}
+
+.s6__facts dd {
+  margin: 0;
+}
+
+.s6__placeholder {
+  margin-top: auto;
+}
+
+.s6__pill {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border: 1px dashed var(--control);
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+/* ---------- Right page: the screen ---------- */
+.s6__screen {
+  container-type: inline-size;
+  margin: clamp(1rem, 2.5vw, 2rem);
+  border-radius: 12px;
+  background: var(--bg);
+  box-shadow: inset 0 0 0 1px var(--hairline), 0 30px 60px -30px rgba(0, 0, 0, 0.8);
+}
+
+.s6__app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 15rem);
+  grid-template-rows: auto auto 1fr;
+  grid-template-areas: 'bar bar' 'kpis feed' 'chart feed';
+  gap: 1rem;
+  aspect-ratio: 16 / 10;
+  padding: 1.25rem;
+  font-size: 0.875rem;
+}
+
+.s6__bar {
+  grid-area: bar;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 0.875rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.s6__brand {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.s6__period,
+.s6__live {
+  color: var(--muted);
+}
+
+.s6__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.s6__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.s6__kpis {
+  grid-area: kpis;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.s6__kpi {
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  background: var(--s6-panel);
+}
+
+.s6__kpi-label,
+.s6__delta {
+  color: var(--muted);
+}
+
+.s6__kpi-value {
+  margin: 0.375rem 0 0.25rem;
+  font-size: clamp(1.25rem, 3.1cqi, 2rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.s6__delta .tabular {
+  color: var(--accent);
+}
+
+.s6__chart {
+  grid-area: chart;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 0;
+  padding: 0.875rem 1rem 0.75rem;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  background: var(--s6-panel);
+}
+
+.s6__chart-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--muted);
+}
+
+.s6__chart-last .tabular {
+  color: var(--ink);
+}
+
+.s6__plot {
+  position: relative;
+  min-height: 7rem;
+  margin: 0.75rem 0 0.5rem 2.25rem;
+}
+
+.s6__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.s6__grid {
+  fill: none;
+  stroke: var(--hairline);
+  stroke-width: 1;
+}
+
+.s6__area {
+  fill: color-mix(in oklab, var(--accent) 9%, transparent);
+  opacity: 1;
+  transition: opacity 600ms var(--ease-out);
+}
+
+.s6__line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.75;
+  stroke-linejoin: round;
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 0;
+}
+
+.s6__end {
+  position: absolute;
+  top: 10.3%;
+  left: 100%;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 22%, transparent);
+  transition:
+    opacity var(--d-small) var(--ease-out),
+    transform var(--d-medium) var(--ease-out);
+}
+
+.s6__ylab {
+  position: absolute;
+  top: var(--y);
+  right: calc(100% + 0.5rem);
+  translate: 0 -50%;
+  color: var(--muted);
+}
+
+.s6__xlab {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 2.25rem;
+  color: var(--muted);
+}
+
+.s6__feed {
+  grid-area: feed;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 0;
+}
+
+.s6__feed-title {
+  color: var(--muted);
+}
+
+.s6__notes {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.s6__note {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  background: var(--s6-panel);
+}
+
+.s6__note p {
+  display: grid;
+  gap: 0.125rem;
+  line-height: 1.35;
+}
+
+.s6__note strong {
+  font-weight: 500;
+}
+
+.s6__note .mono {
+  color: var(--muted);
+}
+
+.s6__note-mark {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-top: 0.45rem;
+  border-radius: 50%;
+  background: var(--control);
+}
+
+.s6__note-mark--hot {
+  background: var(--accent);
+}
+
+/* Animated states: set by the script, never by default, so the page without script is complete. */
+.s6--run .s6__line {
+  stroke-dashoffset: 1;
+}
+
+.s6--run .s6__area {
+  opacity: 0;
+}
+
+.s6--run .s6__end {
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.s6--run .s6__note {
+  opacity: 0;
+}
+
+.s6--draw .s6__line {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1400ms cubic-bezier(.45, .05, .25, 1) 150ms;
+}
+
+.s6--draw .s6__area {
+  opacity: 1;
+  transition-delay: 1350ms;
+}
+
+.s6--draw .s6__end {
+  opacity: 1;
+  transform: none;
+  transition-delay: 1450ms;
+}
+
+/* Reduced motion: a 160 ms fade when replayed. */
+.s6--fade .s6__app {
+  animation: s6-fade var(--d-micro) linear;
+}
+
+@keyframes s6-fade {
+  from { opacity: 0.35; }
+}
+
+/* ---------- Narrow screens: the tool reflows instead of shrinking its text ---------- */
+@media (max-width: 1100px) {
+  .s6__spread {
+    grid-template-columns: minmax(0, 1fr);
+    background: var(--surface);
+  }
+
+  .s6__meta {
+    padding-bottom: 0;
+  }
+
+  .s6__placeholder {
+    margin-top: 0;
+  }
+}
+
+@container (max-width: 720px) {
+  .s6__app {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'bar' 'kpis' 'chart' 'feed';
+    aspect-ratio: auto;
+    padding: 1rem;
+  }
+
+  .s6__plot {
+    min-height: 9rem;
+  }
+}
+
+@container (max-width: 480px) {
+  .s6__kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .s6__kpi:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .s6__kpi-value {
+    font-size: 1.5rem;
+  }
+
+  .s6__period {
+    display: none;
+  }
+}

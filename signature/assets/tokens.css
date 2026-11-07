@@ -1,0 +1,35 @@
+/* Ember tokens: spec §3.2 (colour) and §7.2 (motion). */
+:root {
+  --bg: #0B0B0D;
+  --surface: #151316;
+  --ink: #EDE6DD;
+  --muted: #ABA39B;
+  --muted-glow: #B5ADA5;
+  --accent: #EE8A3C;
+  --accent-ink: #1A1206;
+  --control: #766858;
+  --hairline: #26211F;
+  --wine: #4A0B18;
+  --plum: #2E1F3A;
+  --wax: #8E2236;
+  --wax-ink: #F2B27A;
+  --gilt: linear-gradient(90deg, #B8642A, #EE8A3C 45%, #F6B77E 55%, #B8642A);
+
+  --d-press: 120ms;
+  --d-micro: 160ms;
+  --d-small: 220ms;
+  --d-medium: 320ms;
+  --d-page: 480ms;
+  --d-entrance: 800ms;
+  --d-ambient: 1200ms;
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --ease-in-out: cubic-bezier(.77, 0, .175, 1);
+  --ease-drawer: cubic-bezier(.32, .72, 0, 1);
+  --ease-entrance: cubic-bezier(.16, 1, .3, 1);
+
+  --gutter: clamp(20px, 4.167vw, 60px);
+
+  --font-display: 'Fraunces', 'Fraunces Fallback', 'Fraunces Fallback Android', 'Fraunces Fallback Linux', serif;
+  --font-text: 'Instrument Sans', 'Instrument Sans Fallback', 'Instrument Sans Fallback Android', 'Instrument Sans Fallback Linux', sans-serif;
+  --font-mono: 'Martian Mono', 'Martian Mono Fallback', monospace;
+}

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+  <!-- Placeholder project poster: an integration log with alerts, drawn for the Mandarina board. -->
+  <defs>
+    <radialGradient id="glow" cx="0.1" cy="0.2" r="0.8">
+      <stop offset="0" stop-color="#2E1F3A" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#151316" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="#151316"/>
+  <rect width="1600" height="1000" fill="url(#glow)"/>
+  <rect x="200" y="100" width="4" height="800" fill="#26211F"/>
+  <g fill="#766858">
+    <circle cx="202" cy="170" r="14"/>
+    <circle cx="202" cy="330" r="14"/>
+    <circle cx="202" cy="650" r="14"/>
+    <circle cx="202" cy="810" r="14"/>
+  </g>
+  <circle cx="202" cy="490" r="30" fill="#EE8A3C" fill-opacity="0.25"/>
+  <circle cx="202" cy="490" r="16" fill="#EE8A3C"/>
+  <rect x="260" y="130" width="980" height="80" rx="16" fill="#1E1A1E"/>
+  <rect x="260" y="290" width="980" height="80" rx="16" fill="#1E1A1E"/>
+  <rect x="260" y="430" width="1140" height="120" rx="18" fill="#2A1A16" stroke="#EE8A3C" stroke-width="4"/>
+  <rect x="260" y="610" width="980" height="80" rx="16" fill="#1E1A1E"/>
+  <rect x="260" y="770" width="980" height="80" rx="16" fill="#1E1A1E"/>
+  <g fill="#ABA39B" fill-opacity="0.85">
+    <rect x="300" y="160" width="340" height="20" rx="10"/>
+    <rect x="300" y="320" width="280" height="20" rx="10"/>
+    <rect x="300" y="640" width="380" height="20" rx="10"/>
+    <rect x="300" y="800" width="300" height="20" rx="10"/>
+  </g>
+  <g fill="#766858">
+    <rect x="1040" y="160" width="160" height="20" rx="10"/>
+    <rect x="1040" y="320" width="160" height="20" rx="10"/>
+    <rect x="1040" y="640" width="160" height="20" rx="10"/>
+    <rect x="1040" y="800" width="160" height="20" rx="10"/>
+  </g>
+  <rect x="300" y="462" width="460" height="26" rx="13" fill="#EDE6DD"/>
+  <rect x="300" y="506" width="300" height="16" rx="8" fill="#ABA39B"/>
+  <rect x="1180" y="468" width="180" height="44" rx="22" fill="#EE8A3C"/>
+</svg>

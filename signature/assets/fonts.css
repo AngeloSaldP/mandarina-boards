@@ -1,0 +1,118 @@
+/* Self-hosted OFL fonts (see THIRD_PARTY.md) and metric-matched fallbacks (spec §3.3).
+   Each fallback matches the real face in width (size-adjust) and in vertical metrics: the overrides
+   are the real ascent and descent divided by that face's size-adjust, because the browser scales them by it. */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 500 600;
+  font-display: swap;
+  src: url('fonts/fraunces-roman.woff2') format('woff2');
+}
+
+/* Italic: second clauses of headlines only (lowercase, accented lowercase and punctuation). */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 500 600;
+  font-display: swap;
+  src: url('fonts/fraunces-italic.woff2') format('woff2');
+  unicode-range: U+20-21, U+2C-2E, U+3A-3B, U+3F, U+61-7A, U+A1, U+BF, U+E1, U+E9, U+ED, U+F1, U+F3, U+FA, U+FC;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('fonts/instrument-sans.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Martian Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 87%;
+  font-display: swap;
+  src: url('fonts/martian-mono-caps.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Fraunces Fallback';
+  font-style: normal;
+  src: local('Georgia');
+  size-adjust: 88.9%;
+  ascent-override: 110.2%;
+  descent-override: 29.2%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Fraunces Fallback';
+  font-style: italic;
+  src: local('Georgia Italic'), local('Georgia-Italic');
+  size-adjust: 83.5%;
+  ascent-override: 117.4%;
+  descent-override: 31.1%;
+  line-gap-override: 0%;
+}
+
+/* Android and ChromeOS */
+@font-face {
+  font-family: 'Fraunces Fallback Android';
+  font-style: normal;
+  src: local('Noto Serif'), local('NotoSerif-Regular');
+  size-adjust: 81.7%;
+  ascent-override: 119.9%;
+  descent-override: 31.8%;
+  line-gap-override: 0%;
+}
+
+/* Linux */
+@font-face {
+  font-family: 'Fraunces Fallback Linux';
+  font-style: normal;
+  src: local('DejaVu Serif'), local('DejaVuSerif');
+  size-adjust: 76.5%;
+  ascent-override: 128.1%;
+  descent-override: 34%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Instrument Sans Fallback';
+  font-style: normal;
+  src: local('Arial'), local('ArialMT');
+  size-adjust: 101.5%;
+  ascent-override: 95.6%;
+  descent-override: 24.6%;
+  line-gap-override: 0%;
+}
+
+/* Android and ChromeOS */
+@font-face {
+  font-family: 'Instrument Sans Fallback Android';
+  font-style: normal;
+  src: local('Roboto'), local('Roboto-Regular');
+  size-adjust: 101.8%;
+  ascent-override: 95.3%;
+  descent-override: 24.6%;
+  line-gap-override: 0%;
+}
+
+/* Linux */
+@font-face {
+  font-family: 'Instrument Sans Fallback Linux';
+  font-style: normal;
+  src: local('DejaVu Sans'), local('DejaVuSans');
+  size-adjust: 89.6%;
+  ascent-override: 108.3%;
+  descent-override: 27.9%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Martian Mono Fallback';
+  font-style: normal;
+  src: local('Courier New'), local('CourierNewPSMT');
+  size-adjust: 108%;
+}
