@@ -345,9 +345,21 @@ async function main() {
       crossfade();
     }
   };
+  // Closing from a later spread riffles back to the first one, then closes the cover and zooms out (the reference
+  // closes the same way). New page input while the riffle runs cancels the close.
+  let pendingClose = false;
   const closeBook = () => {
     if (!open) return;
-    // Turn back to the first spread at once, then close.
+    if (!REDUCED && (target > 0 || !leaves.every(leafRest))) {
+      if (target > 0) setTarget(0, true);
+      pendingClose = true;
+      return;
+    }
+    finishClose();
+  };
+  const finishClose = () => {
+    pendingClose = false;
+    // Snap any leaf still off the first spread, then close.
     for (const L of leaves) {
       L.chain.a.value = L.chain.a.target = L.chain.b.value = L.chain.b.target = 0;
       L.chain.a.velocity = L.chain.b.velocity = 0;
@@ -375,6 +387,7 @@ async function main() {
     clock += dtMs;
     const dtS = dtMs / 1000;
     // The cover and the zoom.
+    if (pendingClose && target === 0 && leaves.every(leafRest)) finishClose();
     fixedSteps(dtS, (dt) => cover.step(dt));
     coverGroup.rotation.z = -Math.PI * (1 - cover.value);
     if (zoom.dur > 0) {
@@ -469,7 +482,8 @@ async function main() {
     ray.setFromCamera(ndc, camera);
     if (!open) return ray.intersectObjects([frontBoard, seal], false).length ? { kind: 'cover' } : null;
     const [h] = ray.intersectObjects([leftPage, rightPage], false);
-    if (!h) return null;
+    // Open: a click on the desk around the book closes it.
+    if (!h) return { kind: 'close' };
     if (h.object === leftPage) {
       // The contents rows (spread 0's left page).
       if (leftSpread() === 0 && h.uv) {
@@ -478,9 +492,11 @@ async function main() {
         const row = contentsRows.findIndex((b) => px >= b.x && px <= b.x + b.w && py >= b.y && py <= b.y + b.h);
         if (row >= 0) return { kind: 'row', spread: row + 1 };
       }
-      return target > 0 ? { kind: 'back' } : null;
+      // On the first spread the left page is the inside of the front cover: a click closes the book.
+      return target > 0 ? { kind: 'back' } : { kind: 'close' };
     }
-    return target < SPREADS - 1 ? { kind: 'forward' } : null;
+    // On the last spread a click on the right page closes the book.
+    return target < SPREADS - 1 ? { kind: 'forward' } : { kind: 'close' };
   };
   const leftSpread = () => {
     let s = 0;
@@ -489,7 +505,9 @@ async function main() {
   };
   const act = (h) => {
     if (!h) return;
+    if (h.kind !== 'close') pendingClose = false;
     if (h.kind === 'cover') openBook();
+    else if (h.kind === 'close') closeBook();
     else if (h.kind === 'forward') setTarget(target + 1, false);
     else if (h.kind === 'back') setTarget(target - 1, false);
     else if (h.kind === 'row') setTarget(h.spread, true);
@@ -502,7 +520,8 @@ async function main() {
     act(hit(e));
   });
   canvas.addEventListener('pointermove', (e) => {
-    canvas.style.cursor = hit(e) ? 'pointer' : 'default';
+    const h = hit(e);
+    canvas.style.cursor = !h ? 'default' : h.kind === 'close' ? 'zoom-out' : 'pointer';
     if (!REDUCED) {
       const r = canvas.getBoundingClientRect();
       nudge.x.setTarget(((e.clientX - r.left) / r.width) * 2 - 1);
@@ -514,6 +533,7 @@ async function main() {
     nudge.y.setTarget(0);
   });
   addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') pendingClose = false;
     if (e.key === 'ArrowRight') {
       if (!open) openBook();
       else setTarget(target + 1, false);
@@ -548,6 +568,12 @@ async function main() {
     goTo: (s) => setTarget(s, true),
     get target() {
       return target;
+    },
+    get isOpen() {
+      return open;
+    },
+    get closing() {
+      return pendingClose;
     },
     get lastTurn() {
       return lastTurn;
