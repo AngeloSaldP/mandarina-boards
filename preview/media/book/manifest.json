@@ -1,0 +1,55 @@
+{
+  "encoder": "sharp avif quality 50 effort 4",
+  "totalBytes": 105840,
+  "files": {
+    "cover_front.avif": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 45012,
+      "alpha": false,
+      "source": "art/renders/bakes-01/cover_front.png"
+    },
+    "cover_front_waxbase.avif": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 43554,
+      "alpha": false,
+      "source": "art/renders/bakes-01/cover_front_waxbase.png"
+    },
+    "cover_inside.avif": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 2087,
+      "alpha": false,
+      "source": "art/renders/bakes-01/cover_inside.png"
+    },
+    "page_paper.avif": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 2905,
+      "alpha": false,
+      "source": "art/renders/bakes-01/page_paper.png"
+    },
+    "gilt_edge.avif": {
+      "width": 1024,
+      "height": 80,
+      "bytes": 1313,
+      "alpha": false,
+      "source": "art/renders/bakes-01/gilt_edge.png"
+    },
+    "desk_plate.avif": {
+      "width": 1600,
+      "height": 1000,
+      "bytes": 9916,
+      "alpha": false,
+      "source": "art/renders/bakes-01/desk_plate_desktop.png"
+    },
+    "book_shadow.avif": {
+      "width": 800,
+      "height": 500,
+      "bytes": 1053,
+      "alpha": true,
+      "source": "art/renders/bakes-01/book_shadow_desktop.png"
+    }
+  }
+}
