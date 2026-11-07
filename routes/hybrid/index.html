@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Mandarina routes: hybrid</title>
+    <script type="module" crossorigin src="../assets/hybrid-LXMvtW2E.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/frames-DiBNExPZ.js">
+    <link rel="modulepreload" crossorigin href="../assets/bench-CwinYhIH.js">
+    <link rel="modulepreload" crossorigin href="../assets/scroll-bench-CzEehuVi.js">
+    <link rel="modulepreload" crossorigin href="../assets/preload-helper-DclECHGd.js">
+    <link rel="stylesheet" crossorigin href="../assets/routes-D23zHU_a.css">
+  </head>
+  <body>
+    <a class="skip-link btn" href="#main">Skip to the demo</a>
+    <header class="route-bar">
+      <p class="mono">Mandarina / hero routes</p>
+      <nav aria-label="Routes">
+        <ul>
+          <li><a href="../">Overview</a></li>
+          <li><a href="../prerender/">1. Pre-rendered</a></li>
+          <li><a href="../live/">2. Live book</a></li>
+          <li><a href="./" aria-current="page">3. Hybrid</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <div class="intro">
+        <p class="mono muted">Route 3</p>
+        <h1>Hybrid: frames first, then the live book</h1>
+        <p>
+          Scrolling scrubs the pre-rendered approach. Its last frame is the hero camera, so at the end of the scroll the
+          live book, loaded quietly after <code>load</code>, takes over on the same camera without a jump. "Romper el
+          sello" plays the pre-rendered seal break over it, then the live cover opens and the pages turn.
+        </p>
+      </div>
+
+      <section class="scrub" id="approach" aria-label="Approach sequence, then the live book">
+        <div class="stage" data-ready="false" data-live="loading" data-state="approach">
+          <img class="first" width="1600" height="1000" alt="The black book with its wax seal on a dark desk, under one lamp" fetchpriority="high" decoding="async" />
+          <div class="live-host" role="img" hidden aria-label="The book: once open, the arrow keys or a click on either half turn the pages"></div>
+          <canvas class="frames" aria-hidden="true"></canvas>
+          <canvas class="seal" aria-hidden="true" hidden></canvas>
+          <div class="stage__hud">
+            <p class="readout mono" data-out="status" aria-live="polite">Scroll to scrub</p>
+            <div class="actions">
+              <button class="btn btn--primary" type="button" data-action="unseal" disabled>Romper el sello</button>
+              <button class="btn" type="button" data-action="prev" disabled aria-label="Previous page">←</button>
+              <button class="btn" type="button" data-action="next" disabled aria-label="Next page">→</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="card-title">
+        <aside class="decision" aria-labelledby="card-title">
+          <h2 id="card-title">Decision: route 3, hybrid</h2>
+          <dl>
+            <dt class="mono">Bytes</dt>
+            <dd data-card="bytes"><ul>
+      <li>Approach frames: 1,275 KB desktop (1,564 KB phone).</li>
+      <li>Seal break: 843 KB.</li>
+      <li>Textures: 419 KB.</li>
+      <li>JS: 141 KB gzip, three.js included.</li>
+      <li>Everything after frame 1 (6 KB) loads after <code>load</code>.</li></ul></dd>
+            <dt class="mono">Frame time</dt>
+            <dd data-card="frame">Scrubbing with the live book loaded underneath: p50 6.9 ms, p95 7.0 ms, no frame over 16.7 ms (headed Chromium, Intel Iris Xe (D3D11), 1440x900, a 144 Hz display). Turning pages afterwards is the live route's figure.</dd>
+            <dt class="mono">What it needs</dt>
+            <dd data-card="needs">Both pipelines: Blender frames for the approach and the seal, and baked textures for the live book. They must be rendered from the same scene and grade. Measured hand-offs: approach frame 96 to live, mean difference 1.1 of 255 (desktop) and 2.9 (Pixel 7); seal frame 37 to live, 2.2 and 3.4. No visible jump.</dd>
+            <dt class="mono">Spec lines it changes</dt>
+            <dd data-card="spec"><ul>
+      <li>All of route 1's changes, plus route 2's.</li>
+      <li>On the home it breaks §5.1 (no WebGL) and both of the home's budgets in §10.1: 60 KB of JS and 250 KB of images.</li>
+      <li>As the catalog's entrance on desktop, it fits the 170 KB JS budget, but not the 1.8 MB texture budget once the frames count as images.</li></ul></dd>
+          </dl>
+        </aside>
+      </section>
+    </main>
+    <footer class="site-foot">© 2026 AngeloSaldP</footer>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Mandarina routes: pre-rendered frames</title>
+    <script type="module" crossorigin src="../assets/prerender-CwOQPtNK.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/frames-DiBNExPZ.js">
+    <link rel="modulepreload" crossorigin href="../assets/bench-CwinYhIH.js">
+    <link rel="modulepreload" crossorigin href="../assets/scroll-bench-CzEehuVi.js">
+    <link rel="stylesheet" crossorigin href="../assets/routes-D23zHU_a.css">
+  </head>
+  <body>
+    <a class="skip-link btn" href="#main">Skip to the demo</a>
+    <header class="route-bar">
+      <p class="mono">Mandarina / hero routes</p>
+      <nav aria-label="Routes">
+        <ul>
+          <li><a href="../">Overview</a></li>
+          <li><a href="./" aria-current="page">1. Pre-rendered</a></li>
+          <li><a href="../live/">2. Live book</a></li>
+          <li><a href="../hybrid/">3. Hybrid</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <div class="intro">
+        <p class="mono muted">Route 1</p>
+        <h1>Pre-rendered frames, no WebGL</h1>
+        <p>
+          The home keeps spec §5.1: no WebGL. Scrolling scrubs 96 Blender frames in which the lamp warms from dim and the
+          camera settles to the hero framing (height 4.2, vertical field of view 30°). The first frame is an image with
+          fixed dimensions; the rest load after the page's <code>load</code> event. Under reduced motion only the final
+          still is shown.
+        </p>
+      </div>
+
+      <section class="scrub" id="approach" aria-label="Approach sequence, scrubbed by scroll">
+        <div class="stage" data-ready="false">
+          <img class="first" width="1600" height="1000" alt="The black book with its wax seal on a dark desk, under one lamp" fetchpriority="high" decoding="async" />
+          <canvas class="frames" aria-hidden="true"></canvas>
+          <div class="stage__hud">
+            <p class="readout mono" aria-live="off"><span data-out="frame">Frame 1 / 96</span></p>
+            <p class="readout mono">Scroll to scrub</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="seal" aria-labelledby="seal-title">
+        <p class="mono muted">Spec §7.4, pre-rendered at 30 fps</p>
+        <h2 id="seal-title">The seal break</h2>
+        <p>
+          Rim and M fade over 0 to 220 ms; the 10 segments slide apart along their lines over 0 to 720 ms, fading from
+          380 ms; an accent flash to 600 ms; 20 embers rise; the lamp warms by 25% over 1200 ms. 37 frames, in the
+          overhead framing and close up.
+        </p>
+        <div class="actions" style="margin-bottom: 1.25rem">
+          <button class="btn btn--primary" type="button" data-action="unseal" disabled>Romper el sello</button>
+        </div>
+        <div class="players">
+          <figure class="player" data-player="desktop">
+            <div class="player__view">
+              <img width="1600" height="1000" loading="lazy" alt="Overhead: the sealed book before the break" />
+              <canvas aria-hidden="true"></canvas>
+            </div>
+            <figcaption>Overhead, the hero camera (1600x1000).</figcaption>
+          </figure>
+          <figure class="player" data-player="macro">
+            <div class="player__view">
+              <img width="1200" height="1200" loading="lazy" alt="Close-up: the wax seal before the break" />
+              <canvas aria-hidden="true"></canvas>
+            </div>
+            <figcaption>Close up, the seal macro camera (1200x1200).</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="card-title">
+        <aside class="decision" aria-labelledby="card-title">
+          <h2 id="card-title">Decision: route 1, pre-rendered frames</h2>
+          <dl>
+            <dt class="mono">Bytes</dt>
+            <dd data-card="bytes"><ul>
+      <li>First paint: frame 1 as an image, 6.0 KB (desktop and phone).</li>
+      <li>Approach, all 96 frames (WebP q80): 1,275 KB at 1600x1000, 1,564 KB at 900x1200; they load after <code>load</code>.</li>
+      <li>Seal break, 37 frames: 843 KB overhead, 1,703 KB close up.</li>
+      <li>JS 3.9 KB and CSS 2.5 KB gzip (demo page, fonts aside).</li></ul></dd>
+            <dt class="mono">Frame time</dt>
+            <dd data-card="frame">Scrubbing for 10 s: p50 6.9 ms, p95 7.0 ms, no frame over 16.7 ms (headed Chromium, Intel Iris Xe (D3D11), 1440x900, a 144 Hz display). The display caps it at 144 Hz, so this shows it keeps up, not its true cost (one drawImage per frame).</dd>
+            <dt class="mono">What it needs</dt>
+            <dd data-card="needs">Blender renders per framing (about 3 min of GPU for 96 frames), a frame CDN (R2), about 3 KB of scroll code, and nothing at runtime beyond 2D canvas. Reduced motion shows the final still. Any change to the scene means re-rendering.</dd>
+            <dt class="mono">Spec lines it changes</dt>
+            <dd data-card="spec"><ul>
+      <li>§5.1: the hero still becomes a scrubbed sequence (still no WebGL, so that line holds).</li>
+      <li>§10.1 home images 250 KB: the first frame (6 KB) and the final still (21 to 26 KB) fit, but the full sequence is 5 to 6 times the budget. Either the frames after <code>load</code> sit outside the budget, or the sequence drops to about 24 frames.</li>
+      <li>§7.4: the seal break becomes frames (843 KB per framing) instead of code.</li>
+      <li>§3.5: the faint kicker and bounce (lookdev-06) are a deviation from "one lamp from above".</li></ul></dd>
+          </dl>
+        </aside>
+      </section>
+    </main>
+    <footer class="site-foot">© 2026 AngeloSaldP</footer>
+  </body>
+</html>

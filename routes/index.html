@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Mandarina: hero routes</title>
+    <link rel="stylesheet" crossorigin href="./assets/routes-D23zHU_a.css">
+  </head>
+  <body>
+    <a class="skip-link btn" href="#main">Skip to the routes</a>
+    <header class="route-bar">
+      <p class="mono">Mandarina / hero routes</p>
+      <nav aria-label="Routes">
+        <ul>
+          <li><a href="./" aria-current="page">Overview</a></li>
+          <li><a href="prerender/">1. Pre-rendered</a></li>
+          <li><a href="live/">2. Live book</a></li>
+          <li><a href="hybrid/">3. Hybrid</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <div class="intro">
+        <h1>Three ways to bring the desk to life</h1>
+        <p>
+          The same Blender desk (lookdev-06), shown three ways. Each page ends with a decision card: its bytes, its frame
+          time, what it needs and which spec lines it would change. Frame times were measured in a headed Chromium on the
+          studio's laptop GPU; the owner's iPhone ran the original spike at 58.5 fps, and a mid-range Android is still
+          unmeasured.
+        </p>
+      </div>
+      <section class="section" style="padding-top: 0" aria-label="Routes">
+        <ul class="routes">
+          <li>
+            <img src="frames/approach-desktop/0001.webp" width="1600" height="1000" alt="Frame 1 of the approach: the desk in dim light, seen from higher up and a little off-axis" loading="lazy" />
+            <h2><a href="prerender/">1. Pre-rendered frames</a></h2>
+            <p>Scroll scrubs 96 frames of the camera settling and the lamp warming; the seal break plays as 37 frames. No WebGL on the home.</p>
+          </li>
+          <li>
+            <img src="frames/approach-desktop/0096.webp" width="1600" height="1000" alt="The hero still: the sealed book centred on the desk under the lamp" loading="lazy" />
+            <h2><a href="live/">2. The live book</a></h2>
+            <p>The three.js book dressed in textures baked from the Blender scene; the cover opens and the pages turn live.</p>
+          </li>
+          <li>
+            <img src="frames/sealbreak-desktop/0012.webp" width="1600" height="1000" alt="Mid seal break: the segments parting and embers rising over the cover" loading="lazy" />
+            <h2><a href="hybrid/">3. Hybrid</a></h2>
+            <p>The frames for the approach and the seal break, handing off to the live book on the same camera.</p>
+          </li>
+        </ul>
+      </section>
+      <section class="section" aria-labelledby="numbers-title">
+        <h2 id="numbers-title">Numbers</h2>
+        <div class="table-wrap" data-numbers><table>
+  <thead><tr><th>Number</th><th>Value</th><th>What it measures</th></tr></thead>
+  <tbody>
+    <tr><td>Approach frames, desktop</td><td>1,275,236 B</td><td>96 WebP q80 frames at 1600x1000, on disk</td></tr>
+    <tr><td>Approach frames, phone</td><td>1,564,474 B</td><td>96 WebP q80 frames at 900x1200, on disk</td></tr>
+    <tr><td>First frame</td><td>6,038 B</td><td>the image painted before any script (frame 1, desktop)</td></tr>
+    <tr><td>Seal break, overhead</td><td>842,628 B</td><td>37 frames at 30 fps, 1600x1000</td></tr>
+    <tr><td>Seal break, close up</td><td>1,702,732 B</td><td>37 frames at 30 fps, 1200x1200</td></tr>
+    <tr><td>Live textures</td><td>418,604 B</td><td>the nine baked WebP files the live book fetches</td></tr>
+    <tr><td>Live JS</td><td>139.6 KB gzip</td><td>three.js chunk (135.6 KB) plus the page code, gzip level 9</td></tr>
+    <tr><td>Live frame time</td><td>p50 6.9 ms, p95 7.0 ms</td><td>30 s page-turn benchmark, headed Chromium, Intel Iris Xe (D3D11), 1440x900, a 144 Hz display; vsync-bound</td></tr>
+    <tr><td>Scrub frame time</td><td>p50 6.9 ms, p95 7.0 ms</td><td>10 s scroll sweep, same machine, routes 1 and 3</td></tr>
+    <tr><td>Hand-off, approach to live</td><td>1.1 / 2.9 of 255</td><td>mean pixel difference between frame 96 and the live render (desktop / Pixel 7)</td></tr>
+    <tr><td>Hand-off, seal to live</td><td>2.2 / 3.4 of 255</td><td>mean pixel difference between seal frame 37 and the live render after the seal</td></tr>
+  </tbody>
+</table></div>
+      </section>
+    </main>
+    <footer class="site-foot">© 2026 AngeloSaldP</footer>
+  </body>
+</html>

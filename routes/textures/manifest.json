@@ -1,0 +1,140 @@
+{
+  "source": "art/scene/bake_live.py on the lookdev-06 scene (Blender 4.5 LTS, Cycles), quality 85 WebP",
+  "units": "Blender units = three.js units; three.js (x, y, z) = Blender (x, z, -y)",
+  "cameras": {
+    "hero": "Blender (0, 0, 4.2), straight down, vertical FOV 30, image up = Blender +y; three.js position (0, 4.2, 0), lookAt (0, 0, 0), up (0, 0, -1), fov 30; desktop 1600x1000 (aspect 1.6), phone 900x1200 (aspect 0.75)",
+    "book": "closed book centred at the origin: cover 0.78 x 1.04, spine edge at x = -0.39, cover top at height 0.105"
+  },
+  "colour": "all files are sRGB; the lit files carry the AgX look and the ember grade of the stills",
+  "totalBytes": 608714,
+  "files": {
+    "book_shadow_desktop.webp": {
+      "width": 1600,
+      "height": 1000,
+      "bytes": 71854,
+      "contains": "the closed book's shadow and contact darkening alone: black, alpha = 1 - (desk with book hidden from camera) / (desk without book); draw over the desk plate with normal alpha blending, under the live book",
+      "uv": "screen-aligned: covers the whole 1600x1000 viewport of the hero_desktop camera (Blender (0, 0, 4.2) looking down, vertical FOV 30; three.js (0, 4.2, 0), up (0, 0, -1)); top row = far edge of the desk (three.js -z)",
+      "master": "renders/bakes-01/book_shadow_desktop.png"
+    },
+    "book_shadow_phone.webp": {
+      "width": 900,
+      "height": 1200,
+      "bytes": 98550,
+      "contains": "the closed book's shadow and contact darkening alone: black, alpha = 1 - (desk with book hidden from camera) / (desk without book); draw over the desk plate with normal alpha blending, under the live book",
+      "uv": "screen-aligned: covers the whole 900x1200 viewport of the hero_phone camera (Blender (0, 0, 4.2) looking down, vertical FOV 30; three.js (0, 4.2, 0), up (0, 0, -1)); top row = far edge of the desk (three.js -z)",
+      "master": "renders/bakes-01/book_shadow_phone.png"
+    },
+    "cover_front.webp": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 97818,
+      "contains": "the front cover's top face, orthographic from above: leather, the deboss ring and frame, the intact seal. Lit: lamp, kicker and bounce as in lookdev-06, AgX and the ember grade, so it already looks as it does in the stills; show it unlit (MeshBasicMaterial, sRGB, no tone mapping) or the live light will double it.",
+      "uv": "u = 0 at the spine edge, 1 at the fore edge (Blender x -0.39..0.39, three.js x likewise); v = 1 (top row) at the head (Blender +y, three.js -z), 0 at the tail; spans the full 0.78 x 1.04 cover including the 4.5 mm bevel, so the extreme corners show a few pixels of desk. Matches PlaneGeometry default UVs on a plane laid flat with rotation.x = -PI/2 and x running from the spine.",
+      "master": "renders/bakes-01/cover_front.png"
+    },
+    "cover_front_flat.webp": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 32894,
+      "contains": "the front cover's top face, orthographic from above: leather, the deboss ring and frame, the intact seal. Lightly lit: no lamp, a uniform white sky, Standard view, no grade (albedo with ambient occlusion).",
+      "uv": "u = 0 at the spine edge, 1 at the fore edge (Blender x -0.39..0.39, three.js x likewise); v = 1 (top row) at the head (Blender +y, three.js -z), 0 at the tail; spans the full 0.78 x 1.04 cover including the 4.5 mm bevel, so the extreme corners show a few pixels of desk. Matches PlaneGeometry default UVs on a plane laid flat with rotation.x = -PI/2 and x running from the spine.",
+      "master": "renders/bakes-01/cover_front_flat.png"
+    },
+    "cover_front_unsealed.webp": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 88484,
+      "contains": "the front cover without the seal: only a faint wax residue where it sat. Lit: lamp, kicker and bounce as in lookdev-06, AgX and the ember grade, so it already looks as it does in the stills; show it unlit (MeshBasicMaterial, sRGB, no tone mapping) or the live light will double it.",
+      "uv": "u = 0 at the spine edge, 1 at the fore edge (Blender x -0.39..0.39, three.js x likewise); v = 1 (top row) at the head (Blender +y, three.js -z), 0 at the tail; spans the full 0.78 x 1.04 cover including the 4.5 mm bevel, so the extreme corners show a few pixels of desk. Matches PlaneGeometry default UVs on a plane laid flat with rotation.x = -PI/2 and x running from the spine.",
+      "master": "renders/bakes-01/cover_front_unsealed.png"
+    },
+    "cover_front_unsealed_flat.webp": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 28778,
+      "contains": "the front cover without the seal: only a faint wax residue where it sat. Lightly lit: no lamp, a uniform white sky, Standard view, no grade (albedo with ambient occlusion).",
+      "uv": "u = 0 at the spine edge, 1 at the fore edge (Blender x -0.39..0.39, three.js x likewise); v = 1 (top row) at the head (Blender +y, three.js -z), 0 at the tail; spans the full 0.78 x 1.04 cover including the 4.5 mm bevel, so the extreme corners show a few pixels of desk. Matches PlaneGeometry default UVs on a plane laid flat with rotation.x = -PI/2 and x running from the spine.",
+      "master": "renders/bakes-01/cover_front_unsealed_flat.png"
+    },
+    "cover_front_waxbase.webp": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 90196,
+      "contains": "the front cover after the seal break, matching the last seal-break frame: the rim, M, disc and segments gone, the wax base left. Lit: lamp, kicker and bounce as in lookdev-06, AgX and the ember grade, so it already looks as it does in the stills; show it unlit (MeshBasicMaterial, sRGB, no tone mapping) or the live light will double it.",
+      "uv": "u = 0 at the spine edge, 1 at the fore edge (Blender x -0.39..0.39, three.js x likewise); v = 1 (top row) at the head (Blender +y, three.js -z), 0 at the tail; spans the full 0.78 x 1.04 cover including the 4.5 mm bevel, so the extreme corners show a few pixels of desk. Matches PlaneGeometry default UVs on a plane laid flat with rotation.x = -PI/2 and x running from the spine.",
+      "master": "renders/bakes-01/cover_front_waxbase.png"
+    },
+    "cover_front_waxbase_flat.webp": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 28812,
+      "contains": "the front cover after the seal break, matching the last seal-break frame: the rim, M, disc and segments gone, the wax base left. Lightly lit: no lamp, a uniform white sky, Standard view, no grade (albedo with ambient occlusion).",
+      "uv": "u = 0 at the spine edge, 1 at the fore edge (Blender x -0.39..0.39, three.js x likewise); v = 1 (top row) at the head (Blender +y, three.js -z), 0 at the tail; spans the full 0.78 x 1.04 cover including the 4.5 mm bevel, so the extreme corners show a few pixels of desk. Matches PlaneGeometry default UVs on a plane laid flat with rotation.x = -PI/2 and x running from the spine.",
+      "master": "renders/bakes-01/cover_front_waxbase_flat.png"
+    },
+    "cover_inside.webp": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 5010,
+      "contains": "the inside of the front cover: the #1A1519 endpaper, under the lamp with the cover lying open. Lit: lamp, kicker and bounce as in lookdev-06, AgX and the ember grade, so it already looks as it does in the stills; show it unlit (MeshBasicMaterial, sRGB, no tone mapping) or the live light will double it.",
+      "uv": "u = 0 at the spine edge, 1 at the fore edge (Blender x -0.39..0.39, three.js x likewise); v = 1 (top row) at the head (Blender +y, three.js -z), 0 at the tail; same convention as cover_front (mirrored from the view so column 0 is the spine edge); spans the full 0.78 x 1.04 cover including the 4.5 mm bevel, so the extreme corners show a few pixels of desk. Matches PlaneGeometry default UVs on a plane laid flat with rotation.x = -PI/2 and x running from the spine.",
+      "master": "renders/bakes-01/cover_inside.png"
+    },
+    "cover_inside_flat.webp": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 5070,
+      "contains": "the inside of the front cover: the #1A1519 endpaper, under the lamp with the cover lying open. Lightly lit: no lamp, a uniform white sky, Standard view, no grade (albedo with ambient occlusion).",
+      "uv": "u = 0 at the spine edge, 1 at the fore edge (Blender x -0.39..0.39, three.js x likewise); v = 1 (top row) at the head (Blender +y, three.js -z), 0 at the tail; same convention as cover_front (mirrored from the view so column 0 is the spine edge); spans the full 0.78 x 1.04 cover including the 4.5 mm bevel, so the extreme corners show a few pixels of desk. Matches PlaneGeometry default UVs on a plane laid flat with rotation.x = -PI/2 and x running from the spine.",
+      "master": "renders/bakes-01/cover_inside_flat.png"
+    },
+    "desk_plate_desktop.webp": {
+      "width": 1600,
+      "height": 1000,
+      "bytes": 21920,
+      "contains": "desk and props without the book, lamp at full lookdev-06 value, ember grade; hero_desktop camera",
+      "uv": "screen-aligned: covers the whole 1600x1000 viewport of the hero_desktop camera (Blender (0, 0, 4.2) looking down, vertical FOV 30; three.js (0, 4.2, 0), up (0, 0, -1)); top row = far edge of the desk (three.js -z)",
+      "master": "renders/bakes-01/desk_plate_desktop.png"
+    },
+    "desk_plate_phone.webp": {
+      "width": 900,
+      "height": 1200,
+      "bytes": 26356,
+      "contains": "desk and props without the book, lamp at full lookdev-06 value, ember grade; hero_phone camera",
+      "uv": "screen-aligned: covers the whole 900x1200 viewport of the hero_phone camera (Blender (0, 0, 4.2) looking down, vertical FOV 30; three.js (0, 4.2, 0), up (0, 0, -1)); top row = far edge of the desk (three.js -z)",
+      "master": "renders/bakes-01/desk_plate_phone.png"
+    },
+    "gilt_edge.webp": {
+      "width": 1024,
+      "height": 80,
+      "bytes": 1794,
+      "contains": "the gilt fore edge of the page block (1.014 long, 0.087 tall), orthographic, seen 25 degrees above level. Lit: lamp, kicker and bounce as in lookdev-06, AgX and the ember grade, so it already looks as it does in the stills; show it unlit (MeshBasicMaterial, sRGB, no tone mapping) or the live light will double it.",
+      "uv": "u = 0 at the tail (three.js +z, nearest the viewer), 1 at the head (three.js -z); v = 0 at the bottom of the page block, 1 at the top. 1024 x 80 keeps the edge's proportions (0.087 x cos 25 deg over 1.014); it can be stretched over any page-edge strip.",
+      "master": "renders/bakes-01/gilt_edge.png"
+    },
+    "gilt_edge_flat.webp": {
+      "width": 1024,
+      "height": 80,
+      "bytes": 996,
+      "contains": "the gilt fore edge of the page block (1.014 long, 0.087 tall), orthographic, seen 25 degrees above level. Lightly lit: no lamp, a uniform white sky, Standard view, no grade (albedo with ambient occlusion).",
+      "uv": "u = 0 at the tail (three.js +z, nearest the viewer), 1 at the head (three.js -z); v = 0 at the bottom of the page block, 1 at the top. 1024 x 80 keeps the edge's proportions (0.087 x cos 25 deg over 1.014); it can be stretched over any page-edge strip.",
+      "master": "renders/bakes-01/gilt_edge_flat.png"
+    },
+    "page_paper.webp": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 5106,
+      "contains": "the dark #141116 contents page, orthographic from above under the lamp (the pool is brighter toward the fore edge). Lit: lamp, kicker and bounce as in lookdev-06, AgX and the ember grade, so it already looks as it does in the stills; show it unlit (MeshBasicMaterial, sRGB, no tone mapping) or the live light will double it.",
+      "uv": "u = 0 at the spine (Blender x -0.373, three.js page x = 0), 1 at the fore edge (x = 0.75 in the live page); v = 1 (top row) at the head (three.js -z). Matches PlaneGeometry(0.75, 1, 12, 1) default UVs with the plane translated so its left edge is the spine.",
+      "master": "renders/bakes-01/page_paper.png"
+    },
+    "page_paper_flat.webp": {
+      "width": 1024,
+      "height": 1365,
+      "bytes": 5076,
+      "contains": "the dark #141116 contents page, orthographic from above under the lamp (the pool is brighter toward the fore edge). Lightly lit: no lamp, a uniform white sky, Standard view, no grade (albedo with ambient occlusion).",
+      "uv": "u = 0 at the spine (Blender x -0.373, three.js page x = 0), 1 at the fore edge (x = 0.75 in the live page); v = 1 (top row) at the head (three.js -z). Matches PlaneGeometry(0.75, 1, 12, 1) default UVs with the plane translated so its left edge is the spine.",
+      "master": "renders/bakes-01/page_paper_flat.png"
+    }
+  }
+}

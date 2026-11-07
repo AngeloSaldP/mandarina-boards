@@ -1,0 +1,15 @@
+{
+  "frames": 96,
+  "width": 1600,
+  "height": 1000,
+  "fps": 24,
+  "format": "webp",
+  "quality": 80,
+  "pattern": "%04d.webp",
+  "first": "0001.webp",
+  "totalBytes": 1275236,
+  "sequence": "approach",
+  "framing": "desktop",
+  "camera": "hero_desktop",
+  "lastFrameIsHeroStill": true
+}

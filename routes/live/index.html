@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Mandarina routes: the live book</title>
+    <script type="module" crossorigin src="../assets/live-BjZXAPgb.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/frames-DiBNExPZ.js">
+    <link rel="modulepreload" crossorigin href="../assets/preload-helper-DclECHGd.js">
+    <link rel="stylesheet" crossorigin href="../assets/routes-D23zHU_a.css">
+  </head>
+  <body>
+    <a class="skip-link btn" href="#main">Skip to the demo</a>
+    <header class="route-bar">
+      <p class="mono">Mandarina / hero routes</p>
+      <nav aria-label="Routes">
+        <ul>
+          <li><a href="../">Overview</a></li>
+          <li><a href="../prerender/">1. Pre-rendered</a></li>
+          <li><a href="./" aria-current="page">2. Live book</a></li>
+          <li><a href="../hybrid/">3. Hybrid</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <div class="intro">
+        <p class="mono muted">Route 2</p>
+        <h1>The live 3D book, with the Blender look</h1>
+        <p>
+          The spike's three.js book, dressed in textures baked from the Blender scene: the desk plate without the book,
+          the book's shadow, the cover (leather, deboss and seal), the inside of the cover, the page paper and the gilt
+          edge. The camera is the hero camera. Until the WebGL scene is ready, the hero still stands in for it.
+        </p>
+      </div>
+
+      <section class="section" style="padding-top: 0" aria-label="Live book">
+        <div class="stage" id="stage" data-state="loading" style="height: min(100svh, 62.5vw + 6rem); min-height: 28rem; border-radius: 12px">
+          <img class="poster" width="1600" height="1000" alt="The black book with its wax seal on a dark desk, under one lamp" fetchpriority="high" />
+          <div class="live-host" role="img" aria-label="The book: once open, the arrow keys or a click on either half turn the pages"></div>
+          <div class="stage__hud">
+            <p class="readout mono" data-out="status" aria-live="polite">Loading the book</p>
+            <div class="actions">
+              <button class="btn btn--primary" type="button" data-action="unseal" disabled>Romper el sello</button>
+              <button class="btn" type="button" data-action="prev" disabled aria-label="Previous page">←</button>
+              <button class="btn" type="button" data-action="next" disabled aria-label="Next page">→</button>
+            </div>
+          </div>
+        </div>
+        <p class="muted" style="font-size: 0.9375rem">
+          Add <code>?bench=1</code> to the address for the 30-second page-turn benchmark (the same one the owner's
+          iPhone ran on the spike).
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="card-title">
+        <aside class="decision" aria-labelledby="card-title">
+          <h2 id="card-title">Decision: route 2, the live book</h2>
+          <dl>
+            <dt class="mono">Bytes</dt>
+            <dd data-card="bytes"><ul>
+      <li>JS 139.6 KB gzip: the three.js chunk is 135.6 KB of that.</li>
+      <li>Textures: 418.6 KB, nine WebP (q85) files: desk plates 21.9 and 26.4 KB, shadows 71.9 and 98.6 KB, covers 97.8 and 90.2 KB, inside 5.0 KB, paper 5.1 KB, gilt 1.8 KB.</li>
+      <li>Poster until ready: 20.8 KB.</li>
+      <li>GPU memory, uncompressed with mipmaps: about 59 MB.</li></ul></dd>
+            <dt class="mono">Frame time</dt>
+            <dd data-card="frame">30 s page-turn benchmark: 4,322 frames, p50 6.9 ms, p95 7.0 ms, 2 frames over 16.7 ms (headed Chromium, Intel Iris Xe (D3D11), 1440x900, a 144 Hz display). The owner's iPhone ran the untextured spike at 58.5 fps; a mid-range Android is unmeasured.</dd>
+            <dt class="mono">What it needs</dt>
+            <dd data-card="needs">WebGL with a fine pointer (the spec §6.2 tier rules), the baked textures from <code>art/scene/bake_live.py</code> (96 s of GPU to rebake), and a fallback still. Hand-off from the still: mean pixel difference 1.1 of 255 at desktop, 2.9 on a Pixel 7.</dd>
+            <dt class="mono">Spec lines it changes</dt>
+            <dd data-card="spec"><ul>
+      <li>§5.1 "no WebGL on the home": breaks if this runs on the home. It fits the catalog (170 KB JS budget, §10.1).</li>
+      <li>§10.2 textures: these are WebP; the spec wants KTX2/Basis (KTX2 would also cut the GPU memory from about 59 MB, against the 64 MB cap).</li>
+      <li>§10.2 named imports: adds BoxGeometry, Group, Mesh, MeshBasicMaterial, MeshStandardMaterial and TextureLoader.</li>
+      <li>"No glTF" holds: the geometry is built in code and the props are a texture.</li>
+      <li>§6.3: the 1000 ms camera move on opening is left out to keep the desk plate aligned; the open cover lies over the stamp and envelope, which the open Blender variant moves aside.</li>
+      <li>§7.4: the live seal is a fade (no segments or embers).</li></ul></dd>
+          </dl>
+        </aside>
+      </section>
+    </main>
+    <footer class="site-foot">© 2026 AngeloSaldP</footer>
+  </body>
+</html>
