@@ -59,6 +59,9 @@ const ZOOM_CLOSE_MS = 1100;
 const RIFFLE = { stiffness: 972 / (S * S), damping: 63.6 / S };
 const RIFFLE_LIFT_MS = 67 * S;
 const RIFFLE_GAP_MS = 200 * S;
+// Closing from a later spread: the pages fly back 60 ms apart and the lens starts zooming out at the click, so the
+// close takes about the same time from any depth.
+const CLOSE_GAP_MS = 60 * S;
 const COVER_CLOSE = { stiffness: 240 / (S * S), damping: 28 / S };
 const setChain = (chain, o) => {
   chain.a.stiffness = chain.b.stiffness = o.stiffness;
@@ -205,10 +208,29 @@ async function main() {
     entry.used = ++useClock;
     return entry.texture;
   };
+  const thumbs = new Map();
+  const thumbFor = (key, mirrored = false) => {
+    const id = `${key}${mirrored ? 'm' : ''}`;
+    let t = thumbs.get(id);
+    if (!t) {
+      const c = document.createElement('canvas');
+      c.width = 640;
+      c.height = 400;
+      c.getContext('2d').drawImage(canvasFor(key), 0, 0, 640, 400);
+      t = tex(c);
+      t.anisotropy = 4;
+      if (mirrored) {
+        t.repeat.x = -1;
+        t.offset.x = 1;
+      }
+      thumbs.set(id, t);
+    }
+    return t;
+  };
   const setMap = (material, texture) => {
     if (material.map !== texture) {
+      if (!material.map !== !texture) material.needsUpdate = true; // only when a map appears or goes
       material.map = texture;
-      material.needsUpdate = true;
     }
   };
 
@@ -304,7 +326,7 @@ async function main() {
 
   // ---------- turning ----------
   const leafRest = (L) => L.chain.resting() && L.liftStart === null;
-  const setTarget = (t, stagger) => {
+  const setTarget = (t, stagger, gap = RIFFLE_GAP_MS) => {
     const next = Math.max(0, Math.min(SPREADS - 1, t));
     if (!open) return;
     const prev = target;
@@ -336,7 +358,10 @@ async function main() {
       } else {
         setChain(L.chain, stagger ? RIFFLE : FLIGHT);
         L.liftMs = stagger ? RIFFLE_LIFT_MS : LIFT_MS;
-        L.startAt = clock + (stagger ? i * RIFFLE_GAP_MS : 0);
+        L.startAt = clock + (stagger ? i * gap : 0);
+        // In a riffle only the last leaf lands where the reader looks; the others fly too fast to read, and carry
+        // small copies of their pages, so a riffle never uploads full pages mid-flight.
+        L.riffle = stagger && i < changed.length - 1;
         L.liftStart = L.startAt;
         L.pendingTarget = want;
         L.turn = { start: L.startAt, peakAt: null, peakV: 0, doneAt: null, last: L.chain.value, lastAt: L.startAt };
@@ -366,16 +391,17 @@ async function main() {
   const closeBook = () => {
     if (!open) return;
     if (!REDUCED && (target > 0 || !leaves.every(leafRest))) {
-      if (target > 0) setTarget(0, true);
+      if (target > 0) setTarget(0, true, CLOSE_GAP_MS);
       pendingClose = true;
+      zoomTo(0, ZOOM_CLOSE_MS);
       return;
     }
     finishClose();
   };
-  const finishClose = () => {
+  const finishClose = (snap = true) => {
     pendingClose = false;
-    // Snap any leaf still off the first spread, then close.
-    for (const L of leaves) {
+    // Snap any leaf still off the first spread (unless the riffle is landing them), then close.
+    if (snap) for (const L of leaves) {
       L.chain.a.value = L.chain.a.target = L.chain.b.value = L.chain.b.target = 0;
       L.chain.a.velocity = L.chain.b.velocity = 0;
       L.liftStart = null;
@@ -386,7 +412,7 @@ async function main() {
     cover.stiffness = COVER_CLOSE.stiffness;
     cover.damping = COVER_CLOSE.damping;
     cover.setTarget(0);
-    zoomTo(0, ZOOM_CLOSE_MS);
+    if (zoom.to !== 0) zoomTo(0, ZOOM_CLOSE_MS);
     if (REDUCED) {
       cover.value = 0;
       cover.velocity = 0;
@@ -404,7 +430,7 @@ async function main() {
     clock += dtMs;
     const dtS = dtMs / 1000;
     // The cover and the zoom.
-    if (pendingClose && target === 0 && leaves.every(leafRest)) finishClose();
+    if (pendingClose && target === 0 && leaves.every((L) => L.liftStart === null && L.chain.value < 0.5)) finishClose(false);
     fixedSteps(dtS, (dt) => cover.step(dt));
     coverGroup.rotation.z = -Math.PI * (1 - cover.value);
     if (zoom.dur > 0) {
@@ -450,8 +476,8 @@ async function main() {
         const liftAmt = L.liftStart !== null ? L.lift : 1;
         L.leaf.pose(p, L.dir, liftAmt);
         L.group.position.y = HINGE_Y + 0.0012 + (L.dir > 0 ? LEAVES - L.k : L.k) * 0.0007;
-        setMap(L.leaf.front, textureFor(`R${L.k}`));
-        setMap(L.leaf.back, textureFor(`L${L.k + 1}`, true));
+        setMap(L.leaf.front, L.riffle ? thumbFor(`R${L.k}`) : textureFor(`R${L.k}`));
+        setMap(L.leaf.back, L.riffle ? thumbFor(`L${L.k + 1}`, true) : textureFor(`L${L.k + 1}`, true));
       }
       // The HUD's record: the time of peak motion and when the leaf came to rest, from the start of its lift.
       if (L.turn && L.turn.doneAt === null && clock > L.turn.start) {
