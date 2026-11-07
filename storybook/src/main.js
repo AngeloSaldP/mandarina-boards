@@ -372,9 +372,30 @@ async function main() {
   };
   const crossfade = () => canvas.animate([{ opacity: 0.25 }, { opacity: 1 }], { duration: 200, easing: 'ease-out' });
 
+  // Make every page and its riffle copy in idle time once the book opens, one per callback, so a first jump or close
+  // never draws or uploads a page mid-flight (the product does the same within its memory rule).
+  let prewarmed = false;
+  const prewarm = () => {
+    if (prewarmed) return;
+    prewarmed = true;
+    const jobs = [];
+    for (let k = 0; k < LEAVES; k++) {
+      jobs.push(() => renderer.initTexture(thumbFor(`R${k}`)), () => renderer.initTexture(thumbFor(`L${k + 1}`, true)));
+    }
+    for (let n = 0; n < SPREADS; n++) jobs.push(() => canvasFor(`L${n}`), () => canvasFor(`R${n}`));
+    const idle = window.requestIdleCallback ?? ((fn) => setTimeout(fn, 16));
+    const next = () => {
+      const job = jobs.shift();
+      if (!job) return;
+      job();
+      idle(next);
+    };
+    idle(next);
+  };
   const openBook = () => {
     if (open) return;
     open = true;
+    prewarm();
     cover.stiffness = COVER.stiffness;
     cover.damping = COVER.damping;
     cover.setTarget(1);
