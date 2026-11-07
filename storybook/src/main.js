@@ -21,7 +21,8 @@ const pick = (name, allowed, fallback) => {
 };
 const PARAMS = {
   angle: Number(pick('angle', ['45', '55', '65'], '55')),
-  zoom: Number(pick('zoom', ['60', '75', '90'], '75')),
+  // 85 is the owner's second reference (FastPaginatedEffect.mp4): the open spread at 84.5% of the width.
+  zoom: Number(pick('zoom', ['60', '75', '85', '90'], '85')),
   // The closed book's share of the width. Opening is a real zoom in only when the open spread (about twice the
   // closed book's width) is shown at less than twice this share: 30 with zoom 75 is a 1.25x zoom in.
   closed: Number(pick('closed', ['25', '30', '35', '45'], '30')),
@@ -51,8 +52,18 @@ const FLIGHT = { stiffness: 108 / (S * S), damping: 21.2 / S };
 const COVER = { stiffness: 60, damping: 14 }; // spec §7.2 `cover`
 const FOLLOW = { stiffness: 170, damping: 26 }; // spec §7.2 `follow`
 const ZOOM_OPEN_MS = 1400;
-const ZOOM_CLOSE_MS = 1600;
-const JUMP_GAP_MS = 70;
+const ZOOM_CLOSE_MS = 1100;
+// The fast riffle of the owner's second reference, for contents jumps and for closing from a later spread: each
+// leaf flies in about 0.4 s (a 67 ms lift, then the chain three times faster: 99% at 350 ms), one starting every
+// 200 ms, so several are in the air at once. The cover then snaps shut on a faster spring (99% at 350 ms).
+const RIFFLE = { stiffness: 972 / (S * S), damping: 63.6 / S };
+const RIFFLE_LIFT_MS = 67 * S;
+const RIFFLE_GAP_MS = 200 * S;
+const COVER_CLOSE = { stiffness: 240 / (S * S), damping: 28 / S };
+const setChain = (chain, o) => {
+  chain.a.stiffness = chain.b.stiffness = o.stiffness;
+  chain.a.damping = chain.b.damping = o.damping;
+};
 const NUDGE = 0.015; // the pointer nudge: at most 1.5% of the frame
 
 const canvas = document.getElementById('stage');
@@ -323,7 +334,9 @@ async function main() {
         // In flight: retarget the springs, never drop the input (spec §6.3).
         L.chain.setTarget(want);
       } else {
-        L.startAt = clock + (stagger ? i * JUMP_GAP_MS : 0);
+        setChain(L.chain, stagger ? RIFFLE : FLIGHT);
+        L.liftMs = stagger ? RIFFLE_LIFT_MS : LIFT_MS;
+        L.startAt = clock + (stagger ? i * RIFFLE_GAP_MS : 0);
         L.liftStart = L.startAt;
         L.pendingTarget = want;
         L.turn = { start: L.startAt, peakAt: null, peakV: 0, doneAt: null, last: L.chain.value, lastAt: L.startAt };
@@ -337,6 +350,8 @@ async function main() {
   const openBook = () => {
     if (open) return;
     open = true;
+    cover.stiffness = COVER.stiffness;
+    cover.damping = COVER.damping;
     cover.setTarget(1);
     zoomTo(1, ZOOM_OPEN_MS);
     if (REDUCED) {
@@ -368,6 +383,8 @@ async function main() {
     }
     target = 0;
     open = false;
+    cover.stiffness = COVER_CLOSE.stiffness;
+    cover.damping = COVER_CLOSE.damping;
     cover.setTarget(0);
     zoomTo(0, ZOOM_CLOSE_MS);
     if (REDUCED) {
@@ -414,7 +431,7 @@ async function main() {
     // The leaves.
     for (const L of leaves) {
       if (L.liftStart !== null && clock >= L.liftStart) {
-        const lt = Math.min(1, (clock - L.liftStart) / LIFT_MS);
+        const lt = Math.min(1, (clock - L.liftStart) / (L.liftMs ?? LIFT_MS));
         L.lift = lt * lt; // ease-in
         if (lt >= 1) {
           L.liftStart = null;
