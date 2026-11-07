@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:,">
+  <title>Mandarina: libro de cuentos (prototipo)</title>
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three.module.js" } }
+  </script>
+  <style>
+    html, body { margin: 0; height: 100%; background: #0B0B0D; overflow: hidden; }
+    #stage { display: block; width: 100vw; height: 100vh; touch-action: none; }
+    #hud {
+      position: fixed; left: 12px; bottom: 10px; margin: 0;
+      font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      color: #ABA39B; white-space: pre; pointer-events: none;
+    }
+    #hud[hidden] { display: none; }
+    .credit {
+      position: fixed; right: 12px; bottom: 10px; margin: 0;
+      font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #6E6660;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stage" aria-label="Prototipo: un libro de piel sobre un escritorio. Pulsa la portada o Enter para abrirlo; las flechas pasan página; Esc lo cierra."></canvas>
+  <pre id="hud"></pre>
+  <p class="credit">© 2026 AngeloSaldP</p>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
