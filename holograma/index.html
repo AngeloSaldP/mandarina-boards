@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mandarina: Del papel al holograma</title>
+<style>
+:root{color-scheme:dark;--ink:#EDE6DD;--muted:#B9B0A6;--accent:#EE8A3C;--parchment:#E9DDC4;--bg:#0B0B0D;
+  --spring:cubic-bezier(0.22,1,0.36,1)}
+@supports (transition-timing-function: linear(0, 1)){
+  /* the ui spring, settling with at most 1.5% overshoot */
+  :root{--spring:linear(0, 0.21 6%, 0.53 14%, 0.8 24%, 0.95 36%, 1.01 50%, 1.015 60%, 1.005 76%, 1)}
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(120% 90% at 50% 20%,#1d1712 0%,var(--bg) 70%);color:var(--ink);font:16px/1.55 system-ui,sans-serif;overflow-x:hidden}
+a{color:var(--accent)}
+.top{max-width:68rem;margin:0 auto;padding:20px 16px 0}
+.top h1{font-size:1.4rem;margin:0 0 .2rem}
+.top p{margin:0;color:var(--muted);max-width:46rem}
+#stage{min-height:calc(100vh - 120px)}
+.desk{max-width:68rem;margin:0 auto;padding:12px 16px 120px}
+.how{margin:0 0 4px;font-size:.95rem}
+.how b{color:var(--accent);font-weight:600}
+.status{min-height:1.6em;margin:10px 0 0;color:var(--muted);font-size:.95rem;text-align:center;transition:opacity 200ms ease-out}
+.persp{perspective:1600px;perspective-origin:50% 0%;padding:40px 0 10px}
+.book{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0;width:min(100%,1040px);margin:0 auto;
+  transform:rotateX(26deg);transform-style:preserve-3d;padding:10px;border-radius:10px;
+  background:linear-gradient(#3a2418,#2a190f);box-shadow:0 40px 60px -20px rgba(0,0,0,.7)}
+.page{position:relative;aspect-ratio:16/10;overflow:visible;transform-style:preserve-3d;background:var(--parchment)}
+.page.left{border-radius:4px 0 0 4px;box-shadow:inset -18px 0 24px -16px rgba(60,30,10,.45);overflow:hidden}
+.page.right{border-radius:0 4px 4px 0;cursor:pointer;outline:none;
+  background:radial-gradient(70% 70% at 50% 50%,#f4e8cf 0%,var(--parchment) 70%);box-shadow:inset 18px 0 24px -16px rgba(60,30,10,.45)}
+.page.right:focus-visible{box-shadow:0 0 0 3px var(--accent)}
+.page img.still{display:block;width:100%;height:100%;object-fit:cover}
+.holo{position:absolute;inset:0;transform-style:preserve-3d}
+.layer{position:absolute;inset:0;border-radius:2px;backface-visibility:hidden;
+  transform:translate3d(0,0,0);opacity:0;
+  transition:transform 640ms var(--spring) calc(var(--d) * 80ms),opacity 260ms ease-out calc(var(--d) * 80ms),box-shadow 260ms ease-out}
+.layer.shot{background:url(first-screen.avif) center/cover no-repeat;mix-blend-mode:screen;filter:sepia(.35) saturate(1.3) brightness(1.15)}
+.layer.l1{clip-path:inset(0 0 74% 0)}
+.layer.l2{clip-path:inset(30% 10% 18% 10%)}
+.layer.top{opacity:1;overflow:hidden;background:#151316}
+.layer.top video{display:block;width:100%;height:100%;object-fit:cover}
+.scan{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 300ms ease-out;
+  background:repeating-linear-gradient(to bottom,rgba(255,196,130,.13) 0 1px,transparent 1px 3px)}
+.scan::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(255,170,90,.22) 48%,transparent 56%);
+  background-size:100% 260%;animation:sweep 2.6s linear infinite}
+@keyframes sweep{from{background-position:0 100%}to{background-position:0 -160%}}
+/* Raised: each layer stands at its own depth; the top one carries the clip, parallax at most 12 px there. */
+.holo{transform-origin:50% 100%;transition:transform 640ms var(--spring)}
+.book[data-lift] .holo{transform:rotateX(-16deg)}
+/* Each plane stands higher and a little smaller than the one below, so every edge shows around the clip. */
+.book[data-lift] .layer{
+  transform:translate3d(calc(var(--px,0) * var(--d) * 4px),calc(var(--py,0) * var(--d) * 4px - var(--d) * 12px),calc(30px + var(--d) * 48px)) scale(calc(1 - var(--d) * 0.06));
+  box-shadow:0 0 0 1px rgba(238,138,60,.6),0 0 26px rgba(238,138,60,.3)}
+.book[data-lift] .layer.l0{opacity:.45}
+.book[data-lift] .layer.l1{opacity:.75}
+.book[data-lift] .layer.l2{opacity:.7}
+.book[data-lift] .layer.top{opacity:.93}
+.book[data-lift] .scan{opacity:.75;transition-delay:520ms}
+/* While parallax follows the pointer, the depth no longer staggers. */
+.book[data-lift][data-settled] .layer{transition:transform 180ms ease-out,opacity 260ms ease-out,box-shadow 260ms ease-out}
+.book[data-lift] .page.right{background:radial-gradient(60% 60% at 50% 55%,#ffe2b8 0%,var(--parchment) 75%)}
+@media (prefers-reduced-motion: reduce){
+  .layer,.scan,.holo{transition:none}
+  .scan::after{animation:none}
+}
+@media (max-width:640px){.persp{perspective:900px}.book{transform:rotateX(18deg);padding:6px}}
+
+/* The picker: harness chrome, not part of the design. */
+.proto-picker{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:2147483647;display:flex;align-items:center;gap:2px;padding:4px;border-radius:999px;background:rgba(10,10,10,0.82);-webkit-backdrop-filter:blur(12px) saturate(1.4);backdrop-filter:blur(12px) saturate(1.4);box-shadow:0 0 0 1px rgba(255,255,255,0.08) inset,0 8px 24px rgba(0,0,0,0.24),0 2px 6px rgba(0,0,0,0.12);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;line-height:1;-webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none}
+.proto-picker-highlight{position:absolute;top:4px;left:0;height:28px;border-radius:999px;background:rgba(255,255,255,0.12);will-change:transform}
+.proto-picker[data-ready] .proto-picker-highlight{transition:transform 250ms cubic-bezier(0.23,1,0.32,1),width 250ms cubic-bezier(0.23,1,0.32,1)}
+@media (prefers-reduced-motion: reduce){.proto-picker[data-ready] .proto-picker-highlight{transition:none}}
+.proto-picker-item{position:relative;display:flex;align-items:center;height:28px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:rgba(255,255,255,0.55);font:inherit;cursor:pointer;transition:color 150ms ease-out}
+.proto-picker-item:hover{color:rgba(255,255,255,0.85)}
+.proto-picker-item:active{transform:scale(0.97)}
+.proto-picker-item:focus-visible{outline:2px solid rgba(255,255,255,0.4);outline-offset:2px}
+.proto-picker-item[data-active]{color:#fff}
+.proto-picker-divider{width:1px;height:16px;margin:0 4px;background:rgba(255,255,255,0.12)}
+.proto-picker-replay{padding:0 10px;font-size:14px}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Del papel al holograma</h1>
+  <p>Vista previa sobre el pliego a página completa, con el material real de Transporte. Tres formas de levantar las capas sin quitar lo que ya tiene el vídeo (el puntero elige el fotograma, el clic abre el proyecto). Teclas 1 a 3 o la barra de abajo; R repite. <a href="../">Volver</a>.</p>
+</header>
+<div id="stage"></div>
+
+<nav class="proto-picker" aria-label="Prototype variants">
+  <span class="proto-picker-highlight" aria-hidden="true"></span>
+  <button class="proto-picker-item" data-active aria-current="true">Al asentarse</button>
+  <button class="proto-picker-item">Mantener</button>
+  <button class="proto-picker-item">En el aire</button>
+  <span class="proto-picker-divider" aria-hidden="true"></span>
+  <button class="proto-picker-item proto-picker-replay" aria-label="Replay animation (R)">↻</button>
+</nav>
+
+<script>
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function scene(how) {
+  return `<section class="desk">
+  <p class="how">${how}</p>
+  <div class="persp"><div class="book">
+    <div class="page left"><img class="still" src="first-screen.avif" alt="Primera pantalla de Transporte de flota"></div>
+    <div class="page right" tabindex="0" role="link" aria-label="Transporte de flota: abrir el proyecto">
+      <div class="holo" aria-hidden="true">
+        <div class="layer shot l0" style="--d:0"></div>
+        <div class="layer shot l1" style="--d:1"></div>
+        <div class="layer shot l2" style="--d:2"></div>
+        <div class="layer top" style="--d:3">
+          <video muted loop playsinline autoplay preload="auto"><source src="spread.webm" type="video/webm"><source src="spread.mp4" type="video/mp4"></video>
+          <div class="scan"></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+  <p class="status" aria-live="polite"></p>
+</section>`;
+}
+
+const variants = [
+  () => scene('<b>Al asentarse.</b> Cuando el pliego se asienta, las capas suben una vez, quedan un momento en el aire y se posan en el vídeo. Después todo es como hoy: el puntero dirige, el clic abre.'),
+  () => scene('<b>Mantener.</b> El vídeo se comporta como hoy. Mantén pulsada la página derecha (o la barra espaciadora con el foco en ella) y el holograma sube; suelta y se posa. Un clic corto abre el proyecto.'),
+  () => scene('<b>En el aire.</b> Al pasar el puntero por la página derecha el holograma sube, y ahí mismo el puntero sigue eligiendo el fotograma de la capa superior. Al salir se posa y el vídeo sigue. El clic abre el proyecto.'),
+];
+
+/* Shared wiring for one mounted scene; `mode` picks when it lifts. */
+const inits = [
+  (s) => { s.canSteer = () => !s.lifted; s.after(450, () => { s.lift(true); s.after(1700, () => s.lift(false)); }); },
+  (s) => {
+    s.canSteer = () => !s.lifted;
+    let timer = 0, raisedByHold = false;
+    s.right.addEventListener('pointerdown', (e) => {
+      s.right.setPointerCapture?.(e.pointerId);
+      raisedByHold = false;
+      timer = setTimeout(() => { raisedByHold = true; s.lift(true); }, 280);
+    });
+    const release = () => { clearTimeout(timer); if (s.lifted) s.lift(false); };
+    s.right.addEventListener('pointerup', release);
+    s.right.addEventListener('pointercancel', release);
+    s.right.addEventListener('contextmenu', (e) => e.preventDefault());
+    s.right.addEventListener('keydown', (e) => { if (e.key === ' ' && !e.repeat) { e.preventDefault(); s.lift(true); } });
+    s.right.addEventListener('keyup', (e) => { if (e.key === ' ') s.lift(false); });
+    s.blockClick = () => { const b = raisedByHold; raisedByHold = false; return b; };
+  },
+  (s) => {
+    s.canSteer = () => true;
+    s.right.addEventListener('pointerenter', (e) => { if (e.pointerType !== 'touch') s.lift(true); });
+    s.right.addEventListener('pointerleave', () => s.lift(false));
+    s.right.addEventListener('focus', () => s.lift(true));
+    s.right.addEventListener('blur', () => s.lift(false));
+  },
+];
+
+let teardown = () => {};
+function wire(i) {
+  teardown();
+  const root = stage.querySelector('.desk');
+  if (!root) return;
+  const book = root.querySelector('.book');
+  const right = root.querySelector('.page.right');
+  const video = root.querySelector('video');
+  const status = root.querySelector('.status');
+  const timers = [];
+  let statusTimer = 0;
+  const s = {
+    right, lifted: false, canSteer: () => true, blockClick: () => false,
+    after: (ms, fn) => timers.push(setTimeout(fn, ms)),
+    lift(on) {
+      if (reduced) { if (on) say('Movimiento reducido: sin holograma, el vídeo sigue como hoy.'); return; }
+      if (on === s.lifted) return;
+      s.lifted = on;
+      book.toggleAttribute('data-lift', on);
+      book.removeAttribute('data-settled');
+      book.style.setProperty('--px', 0); book.style.setProperty('--py', 0);
+      if (on) s.after(900, () => s.lifted && book.setAttribute('data-settled', ''));
+      if (!on && !steering) video.play().catch(() => {});
+    },
+  };
+  function say(text) { status.textContent = text; clearTimeout(statusTimer); statusTimer = setTimeout(() => (status.textContent = ''), 2600); }
+
+  let steering = false;
+  const onMove = (e) => {
+    const r = right.getBoundingClientRect();
+    const sx = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+    const sy = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
+    if (s.lifted) { book.style.setProperty('--px', (sx * 2 - 1).toFixed(3)); book.style.setProperty('--py', (sy * 2 - 1).toFixed(3)); }
+    if (e.pointerType === 'touch' || !s.canSteer() || !(video.duration > 0)) return;
+    steering = true;
+    if (!video.paused) video.pause();
+    if (!video.seeking) video.currentTime = sx * video.duration;
+  };
+  const onLeave = () => { if (steering) { steering = false; video.play().catch(() => {}); } };
+  const onClick = () => {
+    if (s.blockClick()) return;
+    if (inits[i] === inits[0] && s.lifted) { s.lift(false); return; } // raised: a click lays it down first
+    say('Aquí se abriría la página del proyecto (/es/catalogo/transporte-flota/).');
+  };
+  const onKey = (e) => { if (e.key === 'Enter') onClick(); };
+  right.addEventListener('pointermove', onMove);
+  right.addEventListener('pointerleave', onLeave);
+  right.addEventListener('click', onClick);
+  right.addEventListener('keydown', onKey);
+  inits[i](s);
+  teardown = () => { timers.forEach(clearTimeout); clearTimeout(statusTimer); };
+}
+
+// Picker wiring, per the harness spec; mount also wires the scene it renders.
+const stage = document.getElementById('stage');
+const picker = document.querySelector('.proto-picker');
+const highlight = picker.querySelector('.proto-picker-highlight');
+const items = [...picker.querySelectorAll('.proto-picker-item:not(.proto-picker-replay)')];
+const replay = picker.querySelector('.proto-picker-replay');
+let current = 0;
+
+function moveHighlight() {
+  const el = items[current];
+  highlight.style.width = el.offsetWidth + 'px';
+  highlight.style.transform = `translateX(${el.offsetLeft}px)`;
+}
+
+function mount(i) {
+  teardown();
+  stage.innerHTML = '';
+  requestAnimationFrame(() => { stage.innerHTML = variants[i](); wire(i); });
+}
+
+function setActive(i) {
+  if (i < 0 || i >= variants.length) return;
+  current = i;
+  items.forEach((el, j) => {
+    el.toggleAttribute('data-active', j === i);
+    if (j === i) el.setAttribute('aria-current', 'true');
+    else el.removeAttribute('aria-current');
+  });
+  moveHighlight();
+  const url = new URL(location);
+  url.searchParams.set('v', i + 1);
+  history.replaceState(null, '', url);
+  mount(i);
+}
+
+items.forEach((el, i) => el.addEventListener('click', () => setActive(i)));
+replay?.addEventListener('click', () => mount(current));
+window.addEventListener('resize', moveHighlight);
+
+document.addEventListener('keydown', (e) => {
+  if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.isContentEditable) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const num = parseInt(e.key, 10);
+  if (num >= 1 && num <= variants.length) setActive(num - 1);
+  else if (e.key === 'ArrowRight') setActive((current + 1) % variants.length);
+  else if (e.key === 'ArrowLeft') setActive((current - 1 + variants.length) % variants.length);
+  else if (e.key === 'r' || e.key === 'R') mount(current);
+});
+
+setActive((parseInt(new URLSearchParams(location.search).get('v'), 10) || 1) - 1);
+requestAnimationFrame(() => requestAnimationFrame(() => picker.setAttribute('data-ready', '')));
+</script>
+</body>
+</html>
