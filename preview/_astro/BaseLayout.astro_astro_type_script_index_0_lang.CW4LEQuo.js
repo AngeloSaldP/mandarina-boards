@@ -1,1 +1,0 @@
-import{t as e}from"./motion.QOjMBs_4.js";window.addEventListener(`pageswap`,t=>{e()&&t.viewTransition?.skipTransition()});

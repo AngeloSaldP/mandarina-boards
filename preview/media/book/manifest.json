@@ -1,20 +1,20 @@
 {
   "encoder": "sharp avif quality 50 (normal map 60) effort 4",
-  "totalBytes": 71588,
+  "totalBytes": 161492,
   "files": {
     "backdrop.avif": {
       "width": 3104,
       "height": 1940,
-      "bytes": 30058,
+      "bytes": 109691,
       "quality": 50,
-      "source": "art/renders/lookdev-08/backdrop.png"
+      "source": "art/incoming/desk-sketch-55.png"
     },
     "backdrop-first-paint.avif": {
-      "width": 1368,
-      "height": 855,
-      "bytes": 7384,
+      "width": 912,
+      "height": 570,
+      "bytes": 17655,
       "quality": 50,
-      "source": "art/renders/lookdev-08/backdrop.png"
+      "source": "art/incoming/desk-sketch-55.png"
     },
     "cover-color.avif": {
       "width": 1024,

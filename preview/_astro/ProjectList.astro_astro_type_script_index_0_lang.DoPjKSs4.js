@@ -1,1 +1,0 @@
-import{t as e}from"./deep-link.Bdc7nYsb.js";var t=e();if(t&&document.documentElement.dataset.catalogForm===`list`){let e=document.getElementById(t);e?.closest(`#lista`)&&e.focus()}

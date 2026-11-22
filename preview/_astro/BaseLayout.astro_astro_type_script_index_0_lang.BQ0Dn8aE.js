@@ -1,0 +1,1 @@
+import{n as e}from"./motion.CUPfv4uT.js";window.addEventListener(`pageswap`,t=>{e()&&t.viewTransition?.skipTransition()});
