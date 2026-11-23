@@ -1,6 +1,6 @@
 {
   "encoder": "sharp avif quality 50 (backdrop 46, normal map 60) effort 4",
-  "totalBytes": 165895,
+  "totalBytes": 582556,
   "files": {
     "backdrop.avif": {
       "width": 2048,
@@ -19,30 +19,79 @@
     "cover-color.avif": {
       "width": 1024,
       "height": 650,
-      "bytes": 2736,
+      "bytes": 66408,
       "quality": 50,
-      "source": "scripts/bake-cover.mjs"
+      "source": "research/redesign/brasa/01-cover-front.png"
     },
     "cover-normal.avif": {
       "width": 1024,
       "height": 650,
-      "bytes": 10495,
+      "bytes": 65783,
       "quality": 60,
-      "source": "scripts/bake-cover.mjs"
+      "source": "research/redesign/brasa/01-cover-front.png (relief)"
     },
     "seal.avif": {
       "width": 512,
       "height": 512,
-      "bytes": 7591,
+      "bytes": 24392,
       "quality": 50,
-      "source": "scripts/bake-cover.mjs"
+      "source": "research/redesign/brasa/02-seal-medallion.png"
+    },
+    "leather-color.avif": {
+      "width": 512,
+      "height": 512,
+      "bytes": 25731,
+      "quality": 50,
+      "source": "research/redesign/brasa/00-cover-scales-tile.png"
+    },
+    "leather-normal.avif": {
+      "width": 512,
+      "height": 512,
+      "bytes": 28213,
+      "quality": 60,
+      "source": "research/redesign/brasa/00-cover-scales-tile.png (relief)"
     },
     "parchment.avif": {
       "width": 1280,
       "height": 800,
-      "bytes": 13324,
+      "bytes": 36770,
       "quality": 50,
-      "source": "scripts/bake-cover.mjs"
+      "source": "research/redesign/brasa/07-parchment-page.png (its seal painted out)"
+    },
+    "page-edges.avif": {
+      "width": 2048,
+      "height": 512,
+      "bytes": 55744,
+      "quality": 50,
+      "source": "research/redesign/brasa/06-page-edges-ember.png"
+    },
+    "chain-run.avif": {
+      "width": 2048,
+      "height": 126,
+      "bytes": 30966,
+      "quality": 50,
+      "source": "research/redesign/brasa/05-chain-run.png, 05b-chain-loose.png"
+    },
+    "chain-loose.avif": {
+      "width": 2048,
+      "height": 437,
+      "bytes": 42848,
+      "quality": 50,
+      "source": "research/redesign/brasa/05-chain-run.png, 05b-chain-loose.png"
+    },
+    "padlock.avif": {
+      "width": 512,
+      "height": 695,
+      "bytes": 33993,
+      "quality": 50,
+      "source": "research/redesign/brasa/04-padlock.png, 04b-padlock-open.png"
+    },
+    "padlock-open.avif": {
+      "width": 512,
+      "height": 695,
+      "bytes": 39959,
+      "quality": 50,
+      "source": "research/redesign/brasa/04-padlock.png, 04b-padlock-open.png"
     }
   }
 }
