@@ -1,1 +1,0 @@
-import{r as e}from"./motion.CUPfv4uT.js";for(let t of document.querySelectorAll(`[data-motion-toggle]`)){let n=()=>t.setAttribute(`aria-pressed`,String(document.documentElement.dataset.motion===`reduce`));n(),t.addEventListener(`click`,()=>{e(t.getAttribute(`aria-pressed`)!==`true`),n()})}

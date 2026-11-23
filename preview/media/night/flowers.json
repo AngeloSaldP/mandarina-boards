@@ -1,0 +1,100 @@
+{
+  "encoder": "sharp avif quality 45 effort 6",
+  "quality": 45,
+  "kinds": {
+    "lilac": {
+      "file": "flowers-lilac.avif",
+      "width": 843,
+      "height": 96,
+      "bytes": 11433,
+      "sprites": {
+        "lilac-1-face": {
+          "x": 0,
+          "y": 0,
+          "w": 90,
+          "h": 96
+        },
+        "lilac-2-face": {
+          "x": 94,
+          "y": 0,
+          "w": 99,
+          "h": 96
+        },
+        "lilac-3-oblique": {
+          "x": 197,
+          "y": 0,
+          "w": 130,
+          "h": 96
+        },
+        "lilac-4-oblique": {
+          "x": 331,
+          "y": 0,
+          "w": 133,
+          "h": 96
+        },
+        "lilac-5-oblique": {
+          "x": 468,
+          "y": 0,
+          "w": 131,
+          "h": 96
+        },
+        "lilac-6-oblique": {
+          "x": 603,
+          "y": 0,
+          "w": 104,
+          "h": 96
+        },
+        "lilac-7-curl": {
+          "x": 711,
+          "y": 0,
+          "w": 88,
+          "h": 96
+        },
+        "lilac-8-curl": {
+          "x": 803,
+          "y": 0,
+          "w": 40,
+          "h": 96
+        }
+      }
+    },
+    "spider": {
+      "file": "flowers-spider.avif",
+      "width": 736,
+      "height": 134,
+      "bytes": 20953,
+      "sprites": {
+        "spider-1-side": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 132
+        },
+        "spider-2-side": {
+          "x": 148,
+          "y": 0,
+          "w": 144,
+          "h": 115
+        },
+        "spider-3-tilt": {
+          "x": 296,
+          "y": 0,
+          "w": 144,
+          "h": 134
+        },
+        "spider-4-side": {
+          "x": 444,
+          "y": 0,
+          "w": 144,
+          "h": 133
+        },
+        "spider-5-side": {
+          "x": 592,
+          "y": 0,
+          "w": 144,
+          "h": 134
+        }
+      }
+    }
+  }
+}

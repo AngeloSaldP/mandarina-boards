@@ -1,20 +1,20 @@
 {
-  "encoder": "sharp avif quality 50 (normal map 60) effort 4",
-  "totalBytes": 161492,
+  "encoder": "sharp avif quality 50 (backdrop 46, normal map 60) effort 4",
+  "totalBytes": 165895,
   "files": {
     "backdrop.avif": {
-      "width": 3104,
-      "height": 1940,
-      "bytes": 109691,
-      "quality": 50,
-      "source": "art/incoming/desk-sketch-55.png"
+      "width": 2048,
+      "height": 1280,
+      "bytes": 119710,
+      "quality": 46,
+      "source": "research/redesign/finals/desk-plate-final-b.png"
     },
     "backdrop-first-paint.avif": {
       "width": 912,
       "height": 570,
-      "bytes": 17655,
-      "quality": 50,
-      "source": "art/incoming/desk-sketch-55.png"
+      "bytes": 12039,
+      "quality": 40,
+      "source": "research/redesign/finals/desk-plate-final-b.png"
     },
     "cover-color.avif": {
       "width": 1024,
