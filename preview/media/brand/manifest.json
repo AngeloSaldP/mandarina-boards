@@ -20,15 +20,15 @@
       "quality": 45
     },
     "dawn-wide.avif": {
-      "width": 1914,
-      "height": 822,
-      "bytes": 42128,
+      "width": 2400,
+      "height": 1018,
+      "bytes": 55127,
       "quality": 40
     },
     "dawn-phone.avif": {
       "width": 720,
       "height": 1280,
-      "bytes": 20456,
+      "bytes": 18948,
       "quality": 40
     }
   }
