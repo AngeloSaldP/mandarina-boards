@@ -51,7 +51,7 @@ void main() {
   // The stamp is positioned by its bristle tip. A right-leaning handle trails the contact in the vertical direction.
   vec2 d = (vUv - uTip) * vec2(uAspect, 1.);
   vec2 brushAxes = vec2(dot(d, vec2(-uHandle.y, uHandle.x)), dot(d, uHandle));
-  float brushLength = min(.292, uAspect * .19);
+  float brushLength = min(.43, uAspect * .28);
   vec2 brushUv = vec2(20. / 48., 5. / 350.) + brushAxes / (brushLength * vec2(uBrushRatio, 1.));
   if (brushUv.y > -.03 && brushUv.y < .9 && abs(brushUv.x - .55) < .63) {
     float contact = (1. - smoothstep(.03, .62, abs(brushUv.x - .63))) * smoothstep(-.02, .07, brushUv.y);
@@ -193,8 +193,8 @@ export function createBrushReveal({ canvas, from, to, brush, variant }) {
       return;
     }
     const x = -.185 + 1.37 * progress;
-    const y = .53 + .022 * Math.sin(x * 8.3 + .45) + .009 * Math.sin(x * 17.7);
-    const tilt = .58 + .078 * Math.sin(x * 12.1 - .7) + .032 * Math.sin(x * 29 + .15);
+    const y = .53 + .055 * Math.sin(x * 6.1 + .45) + .018 * Math.sin(x * 15.3);
+    const tilt = .58 + .17 * Math.sin(x * 9.4 - .7) + .06 * Math.sin(x * 23 + .15);
     gl.viewport(0, 0, width, height);
     gl.uniform1f(state.progress, progress);
     gl.uniform1f(state.aspect, width / height);
