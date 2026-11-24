@@ -1,6 +1,6 @@
 {
   "encoder": "sharp avif quality 50 (backdrop 46, normal map 60) effort 4",
-  "totalBytes": 582556,
+  "totalBytes": 580882,
   "files": {
     "backdrop.avif": {
       "width": 2048,
@@ -19,23 +19,23 @@
     "cover-color.avif": {
       "width": 1024,
       "height": 650,
-      "bytes": 66408,
+      "bytes": 67853,
       "quality": 50,
-      "source": "research/redesign/brasa/01-cover-front.png"
+      "source": "research/redesign/brasa/01s-cover-front-sun.png"
     },
     "cover-normal.avif": {
       "width": 1024,
       "height": 650,
-      "bytes": 65783,
+      "bytes": 67069,
       "quality": 60,
-      "source": "research/redesign/brasa/01-cover-front.png (relief)"
+      "source": "research/redesign/brasa/01s-cover-front-sun.png (relief)"
     },
     "seal.avif": {
       "width": 512,
       "height": 512,
-      "bytes": 24392,
+      "bytes": 19987,
       "quality": 50,
-      "source": "research/redesign/brasa/02-seal-medallion.png"
+      "source": "research/redesign/brasa/02s-seal-sun.png"
     },
     "leather-color.avif": {
       "width": 512,

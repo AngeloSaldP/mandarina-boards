@@ -1,0 +1,76 @@
+{
+  "encoder": "sharp avif quality 37 (window layers 28) effort 4",
+  "totalBytes": 351337,
+  "files": {
+    "window-wide.avif": {
+      "width": 2400,
+      "height": 1018,
+      "bytes": 61587,
+      "quality": 37,
+      "source": "research/redesign/day/day-window-wide.png"
+    },
+    "window-phone.avif": {
+      "width": 720,
+      "height": 1280,
+      "bytes": 23716,
+      "quality": 37,
+      "source": "research/redesign/day/day-window-phone.png"
+    },
+    "lake-wide.avif": {
+      "width": 2400,
+      "height": 1018,
+      "bytes": 58702,
+      "quality": 37,
+      "source": "research/redesign/day/day-lake-wide.png"
+    },
+    "lake-phone.avif": {
+      "width": 720,
+      "height": 1280,
+      "bytes": 13069,
+      "quality": 37,
+      "source": "research/redesign/day/day-lake-phone.png"
+    },
+    "pines-wide.avif": {
+      "width": 2400,
+      "height": 1018,
+      "bytes": 61175,
+      "quality": 37,
+      "source": "research/redesign/day/day-pines-wide.png"
+    },
+    "pines-phone.avif": {
+      "width": 720,
+      "height": 1280,
+      "bytes": 23650,
+      "quality": 37,
+      "source": "research/redesign/day/day-pines-phone.png"
+    },
+    "window-layer-1-sky.avif": {
+      "width": 1920,
+      "height": 815,
+      "bytes": 3688,
+      "quality": 28,
+      "source": "research/redesign/day/window-day-layer-1-sky.png"
+    },
+    "window-layer-2-far.avif": {
+      "width": 1920,
+      "height": 823,
+      "bytes": 25380,
+      "quality": 28,
+      "source": "research/redesign/day/window-day-layer-2-far.png"
+    },
+    "window-layer-3-near.avif": {
+      "width": 1920,
+      "height": 823,
+      "bytes": 50780,
+      "quality": 28,
+      "source": "research/redesign/day/window-day-layer-3-near.png"
+    },
+    "window-layer-4-frame.avif": {
+      "width": 1920,
+      "height": 823,
+      "bytes": 29590,
+      "quality": 28,
+      "source": "research/redesign/day/window-day-layer-4-frame.png"
+    }
+  }
+}
