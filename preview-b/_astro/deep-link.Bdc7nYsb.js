@@ -1,0 +1,1 @@
+function e(e=location.hash){let t=decodeURIComponent(e.replace(/^#/,``));return/^[a-z0-9]+(-[a-z0-9]+)*$/.test(t)?t:null}export{e as t};

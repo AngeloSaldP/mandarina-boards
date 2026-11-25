@@ -1,0 +1,1 @@
+var e=`(prefers-reduced-motion: reduce)`;function t(){return matchMedia(e).matches}function n(n){let r=matchMedia(e),i=()=>n(t());return r.addEventListener(`change`,i),()=>r.removeEventListener(`change`,i)}export{t as n,n as t};

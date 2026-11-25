@@ -1,0 +1,47 @@
+{
+  "encoder": "sharp avif effort 6",
+  "files": {
+    "lockup.avif": {
+      "width": 569,
+      "height": 96,
+      "bytes": 12121,
+      "quality": 60
+    },
+    "lockup-ink.avif": {
+      "width": 477,
+      "height": 96,
+      "bytes": 4771,
+      "quality": 60
+    },
+    "logo.avif": {
+      "width": 363,
+      "height": 180,
+      "bytes": 12389,
+      "quality": 60
+    },
+    "logo-ink.avif": {
+      "width": 314,
+      "height": 180,
+      "bytes": 7571,
+      "quality": 60
+    },
+    "close-ink.avif": {
+      "width": 2244,
+      "height": 1276,
+      "bytes": 31251,
+      "quality": 45
+    },
+    "dawn-wide.avif": {
+      "width": 2400,
+      "height": 1018,
+      "bytes": 55127,
+      "quality": 40
+    },
+    "dawn-phone.avif": {
+      "width": 720,
+      "height": 1280,
+      "bytes": 18948,
+      "quality": 40
+    }
+  }
+}

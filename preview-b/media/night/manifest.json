@@ -1,0 +1,76 @@
+{
+  "encoder": "sharp avif quality 40 (window layers 34) effort 4",
+  "totalBytes": 274480,
+  "files": {
+    "window-wide.avif": {
+      "width": 2400,
+      "height": 1018,
+      "bytes": 45174,
+      "quality": 40,
+      "source": "research/redesign/finals/night-window-wide.png"
+    },
+    "window-phone.avif": {
+      "width": 720,
+      "height": 1280,
+      "bytes": 19617,
+      "quality": 40,
+      "source": "research/redesign/finals/night-window-phone.png"
+    },
+    "lake-wide.avif": {
+      "width": 2400,
+      "height": 1018,
+      "bytes": 43085,
+      "quality": 40,
+      "source": "research/redesign/finals/night-lake-wide.png"
+    },
+    "lake-phone.avif": {
+      "width": 720,
+      "height": 1280,
+      "bytes": 12770,
+      "quality": 40,
+      "source": "research/redesign/finals/night-lake-phone.png"
+    },
+    "pines-wide.avif": {
+      "width": 2400,
+      "height": 1018,
+      "bytes": 36623,
+      "quality": 40,
+      "source": "research/redesign/finals/night-pines-wide.png"
+    },
+    "pines-phone.avif": {
+      "width": 720,
+      "height": 1280,
+      "bytes": 13248,
+      "quality": 40,
+      "source": "research/redesign/finals/night-pines-phone.png"
+    },
+    "window-layer-1-sky.avif": {
+      "width": 1920,
+      "height": 815,
+      "bytes": 5603,
+      "quality": 34,
+      "source": "research/redesign/finals/window-layer-1-sky.png"
+    },
+    "window-layer-2-far.avif": {
+      "width": 1920,
+      "height": 823,
+      "bytes": 16124,
+      "quality": 34,
+      "source": "research/redesign/finals/window-layer-2-far.png"
+    },
+    "window-layer-3-near.avif": {
+      "width": 1920,
+      "height": 823,
+      "bytes": 57044,
+      "quality": 34,
+      "source": "research/redesign/finals/window-layer-3-near.png"
+    },
+    "window-layer-4-frame.avif": {
+      "width": 1920,
+      "height": 823,
+      "bytes": 25192,
+      "quality": 34,
+      "source": "research/redesign/finals/window-layer-4-frame.png"
+    }
+  }
+}

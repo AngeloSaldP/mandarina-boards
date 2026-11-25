@@ -1,0 +1,1 @@
+import{t as e}from"./deep-link.Bdc7nYsb.js";import{r as t}from"./access-demo.DVzawbd6.js";document.documentElement.toggleAttribute(`data-unsealed`,!t({showcase:!1}));var n=e();if(n&&document.documentElement.dataset.catalogForm===`list`){let e=document.getElementById(n);e?.closest(`#lista`)&&e.focus()}

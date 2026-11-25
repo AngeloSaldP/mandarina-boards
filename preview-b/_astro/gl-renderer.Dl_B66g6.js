@@ -1,0 +1,1 @@
+var e=/swiftshader|llvmpipe|softpipe|microsoft basic render|software/i;function t(t){return e.test(t)}function n(e){try{let t=e.getExtension(`WEBGL_debug_renderer_info`);return String(e.getParameter(t?t.UNMASKED_RENDERER_WEBGL:e.RENDERER)??``)}catch{return``}}export{n,t};

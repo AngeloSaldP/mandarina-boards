@@ -1,0 +1,74 @@
+{
+  "encoder": "sharp avif effort 4; ffmpeg libvpx-vp9",
+  "totalBytes": 203120,
+  "files": {
+    "service-internal-tools.avif": {
+      "width": 1200,
+      "height": 800,
+      "bytes": 18767,
+      "quality": 42,
+      "source": "research/redesign/sections/service-tools-abacus.png"
+    },
+    "service-web.avif": {
+      "width": 1200,
+      "height": 800,
+      "bytes": 19071,
+      "quality": 42,
+      "source": "research/redesign/sections/service-web-mirror.png"
+    },
+    "service-automation.avif": {
+      "width": 1200,
+      "height": 800,
+      "bytes": 18883,
+      "quality": 42,
+      "source": "research/redesign/sections/service-automation-waterclock.png"
+    },
+    "offer-landing.avif": {
+      "width": 720,
+      "height": 480,
+      "bytes": 9219,
+      "quality": 45,
+      "source": "research/redesign/sections/offer-landing-lantern.png"
+    },
+    "offer-site.avif": {
+      "width": 720,
+      "height": 480,
+      "bytes": 10249,
+      "quality": 45,
+      "source": "research/redesign/sections/offer-website-screen.png"
+    },
+    "offer-store.avif": {
+      "width": 720,
+      "height": 480,
+      "bytes": 11378,
+      "quality": 45,
+      "source": "research/redesign/sections/offer-store-scale.png"
+    },
+    "offer-redesign.avif": {
+      "width": 720,
+      "height": 480,
+      "bytes": 9337,
+      "quality": 45,
+      "source": "research/redesign/sections/offer-redesign-bowl.png"
+    },
+    "studio-room.avif": {
+      "width": 1600,
+      "height": 893,
+      "bytes": 30357,
+      "quality": 42,
+      "source": "research/redesign/sections/estudio-room.png"
+    },
+    "studio-loop.webm": {
+      "width": 960,
+      "height": 540,
+      "frames": 145,
+      "bytes": 75859,
+      "crf": 42,
+      "source": "research/redesign/sections/estudio-loop.mp4",
+      "seamSsim": {
+        "all": 1,
+        "luma": 1
+      }
+    }
+  }
+}

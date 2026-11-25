@@ -1,0 +1,40 @@
+{
+  "encoder": "sharp AVIF, effort 4",
+  "files": {
+    "closed-wide.avif": {
+      "width": 2400,
+      "height": 1018,
+      "bytes": 37512,
+      "quality": 32,
+      "source": "batch-13-moon-gate/140-gate-closed-wide.png"
+    },
+    "closed-phone.avif": {
+      "width": 720,
+      "height": 1280,
+      "bytes": 16686,
+      "quality": 32,
+      "source": "batch-13-moon-gate/141-gate-closed-phone.png"
+    },
+    "open-wide.avif": {
+      "width": 2400,
+      "height": 1018,
+      "bytes": 32904,
+      "quality": 32,
+      "source": "batch-13-moon-gate/142-gate-open-wide.png"
+    },
+    "open-phone.avif": {
+      "width": 720,
+      "height": 1280,
+      "bytes": 15890,
+      "quality": 32,
+      "source": "batch-13-moon-gate/143-gate-open-phone.png"
+    },
+    "padlock.avif": {
+      "width": 112,
+      "height": 112,
+      "bytes": 2594,
+      "quality": 58,
+      "source": "batch-12-acceso-concepts/130-padlock.png"
+    }
+  }
+}
