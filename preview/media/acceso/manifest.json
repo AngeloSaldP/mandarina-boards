@@ -2,39 +2,32 @@
   "encoder": "sharp AVIF, effort 4",
   "files": {
     "closed-wide.avif": {
-      "width": 2400,
-      "height": 1018,
-      "bytes": 37512,
-      "quality": 32,
-      "source": "batch-13-moon-gate/140-gate-closed-wide.png"
+      "width": 1600,
+      "height": 1067,
+      "bytes": 37278,
+      "quality": 29,
+      "source": "batch-15-acceso-book/200-closed-wide.png"
+    },
+    "open-wide.avif": {
+      "width": 1600,
+      "height": 1067,
+      "bytes": 30326,
+      "quality": 27,
+      "source": "batch-15-acceso-book/202-open-wide.png"
     },
     "closed-phone.avif": {
       "width": 720,
-      "height": 1280,
-      "bytes": 16686,
-      "quality": 32,
-      "source": "batch-13-moon-gate/141-gate-closed-phone.png"
-    },
-    "open-wide.avif": {
-      "width": 2400,
-      "height": 1018,
-      "bytes": 32904,
-      "quality": 32,
-      "source": "batch-13-moon-gate/142-gate-open-wide.png"
+      "height": 900,
+      "bytes": 16436,
+      "quality": 27,
+      "source": "batch-15-acceso-book/201-closed-phone.png"
     },
     "open-phone.avif": {
       "width": 720,
-      "height": 1280,
-      "bytes": 15890,
-      "quality": 32,
-      "source": "batch-13-moon-gate/143-gate-open-phone.png"
-    },
-    "padlock.avif": {
-      "width": 112,
-      "height": 112,
-      "bytes": 2594,
-      "quality": 58,
-      "source": "batch-12-acceso-concepts/130-padlock.png"
+      "height": 900,
+      "bytes": 15774,
+      "quality": 27,
+      "source": "batch-15-acceso-book/203-open-phone.png"
     }
   }
 }

@@ -1,1 +1,0 @@
-import{t as e}from"./routes.C3sehoiD.js";function t(e){return e.endsWith(`/`)?e:`${e}/`}function n(){return t({ASSETS_PREFIX:void 0,BASE_URL:`/mandarina-boards/preview/`,DEV:!1,MODE:`production`,PROD:!0,PUBLIC_PREVIEW:`1`,SITE:`https://angelosaldp.github.io`,SSR:!1}.PUBLIC_MEDIA_BASE??`${e()}media/`)}function r(e,r=n()){return`${t(r)}${e.replace(/^\/+/,``)}`}export{r as t};
