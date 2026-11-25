@@ -1,20 +1,20 @@
 {
   "encoder": "sharp avif quality 50 (desk: scripts/encode-book-desk.mjs, normal map 60) effort 4",
-  "totalBytes": 580530,
+  "totalBytes": 578424,
   "files": {
     "backdrop.avif": {
-      "width": 1586,
-      "height": 992,
-      "bytes": 119587,
-      "quality": 57,
-      "source": "plate-canvas.png"
+      "width": 4096,
+      "height": 2571,
+      "bytes": 117542,
+      "quality": 27,
+      "source": "plate-canvas-4k.png"
     },
     "backdrop-first-paint.avif": {
       "width": 912,
       "height": 570,
-      "bytes": 11810,
-      "quality": 36,
-      "source": "plate-canvas.png"
+      "bytes": 11749,
+      "quality": 38,
+      "source": "plate-canvas-4k.png"
     },
     "cover-color.avif": {
       "width": 1024,
