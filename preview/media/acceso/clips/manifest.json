@@ -1,0 +1,172 @@
+{
+  "files": {
+    "loop-wide.webm": {
+      "width": 864,
+      "height": 366,
+      "frames": 241,
+      "bytes": 138675,
+      "crf": 42,
+      "fadeFrames": 16,
+      "tailCrf": 12,
+      "tailFrames": 6,
+      "holdSsim": {
+        "all": 0.987557,
+        "luma": 0.98578
+      },
+      "seamSsim": {
+        "all": 0.995307,
+        "luma": 0.994432
+      },
+      "previousSsim": {
+        "all": 0.999948,
+        "luma": 0.999927
+      },
+      "spliceSsim": {
+        "all": 0.996507,
+        "luma": 0.99569
+      },
+      "source": "batch-13-moon-gate/150-gate-loop-wide.mp4"
+    },
+    "loop-wide.mp4": {
+      "width": 864,
+      "height": 366,
+      "frames": 241,
+      "bytes": 196675,
+      "crf": 28,
+      "fadeFrames": 16,
+      "tailCrf": 10,
+      "tailFrames": 6,
+      "holdSsim": {
+        "all": 0.982226,
+        "luma": 0.979641
+      },
+      "seamSsim": {
+        "all": 0.995747,
+        "luma": 0.994663
+      },
+      "previousSsim": {
+        "all": 0.999894,
+        "luma": 0.999941
+      },
+      "spliceSsim": {
+        "all": 0.995562,
+        "luma": 0.994623
+      },
+      "source": "batch-13-moon-gate/150-gate-loop-wide.mp4"
+    },
+    "loop-phone.webm": {
+      "width": 504,
+      "height": 896,
+      "frames": 241,
+      "bytes": 170989,
+      "crf": 40,
+      "fadeFrames": 16,
+      "tailCrf": 12,
+      "tailFrames": 6,
+      "holdSsim": {
+        "all": 0.989252,
+        "luma": 0.987878
+      },
+      "seamSsim": {
+        "all": 0.995139,
+        "luma": 0.994241
+      },
+      "previousSsim": {
+        "all": 0.999953,
+        "luma": 0.999933
+      },
+      "spliceSsim": {
+        "all": 0.995809,
+        "luma": 0.994802
+      },
+      "source": "batch-13-moon-gate/151-gate-loop-phone.mp4"
+    },
+    "loop-phone.mp4": {
+      "width": 504,
+      "height": 896,
+      "frames": 241,
+      "bytes": 275526,
+      "crf": 28,
+      "fadeFrames": 16,
+      "tailCrf": 10,
+      "tailFrames": 6,
+      "holdSsim": {
+        "all": 0.983879,
+        "luma": 0.981667
+      },
+      "seamSsim": {
+        "all": 0.995727,
+        "luma": 0.994695
+      },
+      "previousSsim": {
+        "all": 0.999866,
+        "luma": 0.999909
+      },
+      "spliceSsim": {
+        "all": 0.994584,
+        "luma": 0.993365
+      },
+      "source": "batch-13-moon-gate/151-gate-loop-phone.mp4"
+    },
+    "opening-wide.webm": {
+      "width": 960,
+      "height": 408,
+      "frames": 121,
+      "bytes": 151510,
+      "crf": 42,
+      "fadeFrames": 12,
+      "tailCrf": 24,
+      "tailFrames": 1,
+      "holdSsim": {
+        "all": 0.994464,
+        "luma": 0.993812
+      },
+      "source": "batch-13-moon-gate/152-gate-opening-wide.mp4"
+    },
+    "opening-wide.mp4": {
+      "width": 960,
+      "height": 408,
+      "frames": 121,
+      "bytes": 164131,
+      "crf": 32,
+      "fadeFrames": 12,
+      "tailCrf": 17,
+      "tailFrames": 1,
+      "holdSsim": {
+        "all": 0.992779,
+        "luma": 0.992022
+      },
+      "source": "batch-13-moon-gate/152-gate-opening-wide.mp4"
+    },
+    "opening-phone.webm": {
+      "width": 504,
+      "height": 896,
+      "frames": 121,
+      "bytes": 176451,
+      "crf": 42,
+      "fadeFrames": 12,
+      "tailCrf": 24,
+      "tailFrames": 1,
+      "holdSsim": {
+        "all": 0.9946,
+        "luma": 0.993896
+      },
+      "source": "batch-13-moon-gate/153-gate-opening-phone.mp4"
+    },
+    "opening-phone.mp4": {
+      "width": 504,
+      "height": 896,
+      "frames": 121,
+      "bytes": 215494,
+      "crf": 32,
+      "fadeFrames": 12,
+      "tailCrf": 17,
+      "tailFrames": 1,
+      "holdSsim": {
+        "all": 0.993104,
+        "luma": 0.992168
+      },
+      "source": "batch-13-moon-gate/153-gate-opening-phone.mp4"
+    }
+  }
+}
