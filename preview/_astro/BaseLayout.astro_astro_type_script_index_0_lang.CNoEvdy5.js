@@ -1,0 +1,1 @@
+import{E as e}from"./site.CeUFv8rr.js";window.addEventListener(`pageswap`,t=>{e()&&t.viewTransition?.skipTransition()});

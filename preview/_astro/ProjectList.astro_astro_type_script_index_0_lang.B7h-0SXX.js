@@ -1,1 +1,0 @@
-import{_ as e,b as t}from"./site.ClecvklZ.js";document.documentElement.toggleAttribute(`data-unsealed`,!t({showcase:!1}));var n=e();if(n&&document.documentElement.dataset.catalogForm===`list`){let e=document.getElementById(n);e?.closest(`#lista`)&&e.focus()}

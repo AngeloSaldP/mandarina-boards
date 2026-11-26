@@ -1,6 +1,6 @@
 {
   "encoder": "sharp avif effort 4; ffmpeg libvpx-vp9",
-  "totalBytes": 203120,
+  "totalBytes": 220743,
   "files": {
     "service-internal-tools.avif": {
       "width": 1200,
@@ -24,31 +24,31 @@
       "source": "research/redesign/sections/service-automation-waterclock.png"
     },
     "offer-landing.avif": {
-      "width": 720,
-      "height": 480,
-      "bytes": 9219,
-      "quality": 45,
+      "width": 1080,
+      "height": 720,
+      "bytes": 13739,
+      "quality": 40,
       "source": "research/redesign/sections/offer-landing-lantern.png"
     },
     "offer-site.avif": {
-      "width": 720,
-      "height": 480,
-      "bytes": 10249,
-      "quality": 45,
+      "width": 1080,
+      "height": 720,
+      "bytes": 15286,
+      "quality": 40,
       "source": "research/redesign/sections/offer-website-screen.png"
     },
     "offer-store.avif": {
-      "width": 720,
-      "height": 480,
-      "bytes": 11378,
-      "quality": 45,
+      "width": 1080,
+      "height": 720,
+      "bytes": 16300,
+      "quality": 40,
       "source": "research/redesign/sections/offer-store-scale.png"
     },
     "offer-redesign.avif": {
-      "width": 720,
-      "height": 480,
-      "bytes": 9337,
-      "quality": 45,
+      "width": 1080,
+      "height": 720,
+      "bytes": 12481,
+      "quality": 40,
       "source": "research/redesign/sections/offer-redesign-bowl.png"
     },
     "studio-room.avif": {

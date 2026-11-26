@@ -1,0 +1,1 @@
+import{S as e,y as t}from"./site.CeUFv8rr.js";document.documentElement.toggleAttribute(`data-unsealed`,!e({showcase:!1}));var n=t();if(n&&document.documentElement.dataset.catalogForm===`list`){let e=document.getElementById(n);e?.closest(`#lista`)&&e.focus()}
