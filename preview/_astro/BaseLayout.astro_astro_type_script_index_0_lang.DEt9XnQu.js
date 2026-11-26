@@ -1,0 +1,1 @@
+import{w as e}from"./site.ClecvklZ.js";window.addEventListener(`pageswap`,t=>{e()&&t.viewTransition?.skipTransition()});

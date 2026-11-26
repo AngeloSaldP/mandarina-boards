@@ -1,1 +1,0 @@
-import{n as e}from"./motion.CV3jaFo0.js";window.addEventListener(`pageswap`,t=>{e()&&t.viewTransition?.skipTransition()});

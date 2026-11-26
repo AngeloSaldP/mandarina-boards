@@ -1,1 +1,0 @@
-function e(e){return e.endsWith(`/`)?e:`${e}/`}function t(){return e(`/mandarina-boards/preview/`)}export{t};
