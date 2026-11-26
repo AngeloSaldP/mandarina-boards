@@ -1,1 +1,0 @@
-import{n as e}from"./motion.CV3jaFo0.js";var t=document.querySelector(`[data-wordmark-close]`);if(t&&!e()&&t.getBoundingClientRect().top>innerHeight){t.dataset.enter=`ready`;let e=new IntersectionObserver(([n])=>{n.isIntersecting&&(e.disconnect(),requestAnimationFrame(()=>t.dataset.enter=`go`))},{threshold:.15});e.observe(t)}
