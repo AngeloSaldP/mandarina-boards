@@ -1,0 +1,98 @@
+{
+  "encoder": "ffmpeg libvpx-vp9 and libx264 baseline, two passes, 25 fps, a 0.5 s crossfaded seam; posters: sharp avif",
+  "source": {
+    "app": "the pizzeria prototype's menu selector: the Pizzas category opens its flyout of dishes, which scrolls",
+    "captured": "2026-11-26",
+    "take": 1,
+    "firstFrameSeconds": 8.9
+  },
+  "files": {
+    "spread.webm": {
+      "width": 1280,
+      "height": 800,
+      "seconds": 5,
+      "fps": 25,
+      "webm": 424109,
+      "mp4": 548453,
+      "ssim": 0.9942,
+      "seamSsim": 0.9726,
+      "bytes": 424109,
+      "closedCycle": false,
+      "posterSsim": 0.9943
+    },
+    "spread.mp4": {
+      "width": 1280,
+      "height": 800,
+      "seconds": 5,
+      "fps": 25,
+      "bytes": 548453
+    },
+    "hover.webm": {
+      "width": 960,
+      "height": 600,
+      "seconds": 3.5,
+      "fps": 25,
+      "webm": 176066,
+      "mp4": 223366,
+      "ssim": 0.9893,
+      "seamSsim": 0.9551,
+      "bytes": 176066,
+      "tried": {
+        "960x600": {
+          "width": 960,
+          "height": 600,
+          "seconds": 3.5,
+          "fps": 25,
+          "webm": 176066,
+          "mp4": 223366,
+          "ssim": 0.9893,
+          "seamSsim": 0.9551
+        },
+        "480x300": {
+          "width": 480,
+          "height": 300,
+          "seconds": 3.5,
+          "fps": 25,
+          "webm": 184513,
+          "mp4": 237463,
+          "ssim": 0.9955,
+          "seamSsim": 0.9858
+        }
+      },
+      "posterSsim": 0.9932
+    },
+    "hover.mp4": {
+      "width": 960,
+      "height": 600,
+      "seconds": 3.5,
+      "fps": 25,
+      "bytes": 223366
+    },
+    "poster.avif": {
+      "width": 640,
+      "height": 400,
+      "bytes": 12554,
+      "quality": 50
+    },
+    "poster-1280.avif": {
+      "width": 1280,
+      "height": 800,
+      "bytes": 31718,
+      "quality": 50
+    },
+    "poster-sealed.avif": {
+      "width": 640,
+      "height": 400,
+      "bytes": 1416,
+      "quality": 32
+    },
+    "first-screen.avif": {
+      "width": 1280,
+      "height": 800,
+      "bytes": 13593,
+      "quality": 38,
+      "take": 2,
+      "atSeconds": 2.5
+    }
+  }
+}

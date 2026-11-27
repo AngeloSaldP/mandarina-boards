@@ -1,0 +1,98 @@
+{
+  "encoder": "ffmpeg libvpx-vp9 and libx264 baseline, two passes, 25 fps, a 0.5 s crossfaded seam; posters: sharp avif",
+  "source": {
+    "app": "the transport website's own preview: its services page, scrolled to the search and back",
+    "captured": "2026-11-26",
+    "take": 1,
+    "firstFrameSeconds": 7.4
+  },
+  "files": {
+    "spread.webm": {
+      "width": 1280,
+      "height": 800,
+      "seconds": 6,
+      "fps": 25,
+      "webm": 478979,
+      "mp4": 516860,
+      "ssim": 0.9989,
+      "seamSsim": 0.9985,
+      "bytes": 478979,
+      "closedCycle": true,
+      "posterSsim": 0.9994
+    },
+    "spread.mp4": {
+      "width": 1280,
+      "height": 800,
+      "seconds": 6,
+      "fps": 25,
+      "bytes": 516860
+    },
+    "hover.webm": {
+      "width": 960,
+      "height": 600,
+      "seconds": 3.5,
+      "fps": 25,
+      "webm": 126460,
+      "mp4": 241446,
+      "ssim": 0.9971,
+      "seamSsim": 0.9629,
+      "bytes": 126460,
+      "tried": {
+        "960x600": {
+          "width": 960,
+          "height": 600,
+          "seconds": 3.5,
+          "fps": 25,
+          "webm": 126460,
+          "mp4": 241446,
+          "ssim": 0.9971,
+          "seamSsim": 0.9629
+        },
+        "480x300": {
+          "width": 480,
+          "height": 300,
+          "seconds": 3.5,
+          "fps": 25,
+          "webm": 142118,
+          "mp4": 242552,
+          "ssim": 0.9985,
+          "seamSsim": 0.9527
+        }
+      },
+      "posterSsim": 0.9989
+    },
+    "hover.mp4": {
+      "width": 960,
+      "height": 600,
+      "seconds": 3.5,
+      "fps": 25,
+      "bytes": 241446
+    },
+    "poster.avif": {
+      "width": 640,
+      "height": 400,
+      "bytes": 10363,
+      "quality": 50
+    },
+    "poster-1280.avif": {
+      "width": 1280,
+      "height": 800,
+      "bytes": 22094,
+      "quality": 50
+    },
+    "poster-sealed.avif": {
+      "width": 640,
+      "height": 400,
+      "bytes": 1212,
+      "quality": 32
+    },
+    "first-screen.avif": {
+      "width": 1280,
+      "height": 800,
+      "bytes": 28812,
+      "quality": 38,
+      "take": 1,
+      "atSeconds": 3.6
+    }
+  }
+}
